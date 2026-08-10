@@ -1,101 +1,102 @@
-# Guía de Prerrequisitos para el Hackathon  
-### 🧩 Preparativos esenciales para participar con éxito  
+# Prerequisites Guide for the Hackathon
+### 🧩 Essential preparations to participate successfully
 
 ---
 
-## ✅ Registro de Proveedores de Recursos  
-Asegúrate de que los siguientes proveedores de recursos estén registrados en tu suscripción de **Azure**:  
-- `Microsoft.PolicyInsights`  
-- `Microsoft.Cdn`  
-- `Microsoft.StreamAnalytics`  
+## ✅ Resource Provider Registration
+Make sure the following resource providers are registered in your **Azure** subscription:
+- `Microsoft.PolicyInsights`
+- `Microsoft.Cdn`
+- `Microsoft.StreamAnalytics`
 
-**Cómo registrarlos:**  
-1. Ve al **Portal de Azure** → Configuración de la suscripción → *Proveedores de recursos*.  
-2. Selecciona cada proveedor y haz clic en **Registrar**.  
-
----
-
-## ✅ Identidad y Autenticación  
-**Principal de Servicio y Autenticación:**  
-- ID de cliente y secreto *(que no expire antes del segundo día del evento)*.  
-- Los participantes deben tener disponible su **ID de cliente** y **secreto** durante el hackathon.  
+**How to register them:**
+1. Go to the **Azure Portal** → Subscription settings → *Resource providers*.
+2. Select each provider and click **Register**.
 
 ---
 
-## ✅ Prerrequisitos de Microsoft Fabric  
-**Opciones de acceso:**  
-- Crear una **nueva prueba gratuita de Microsoft Fabric**, o  
-- Usar una **capacidad de Fabric ya aprovisionada** en su suscripción de Azure.  
-
-**Requisitos de configuración de Fabric:**  
-- Al menos un miembro asignado como **administrador de Microsoft Fabric**.  
-- Un **espacio de trabajo de Fabric** asignado al equipo.  
-- Capacidad para crear **Lakehouses** y **Modelos Semánticos** en Fabric.  
-- Acceso a **OneLake** (almacenamiento de Fabric) para subir archivos.  
+## ✅ Identity and Authentication
+**Service Principal and Authentication:**
+- Client ID and secret *(ensure the secret does not expire before the second day of the event)*.
+- Participants should have their **Client ID** and **secret** available during the hackathon.
 
 ---
 
-## ✅ Requisitos de Azure OpenAI  
-**Cuota TPM para Modelos OpenAI:**  
-- `text-embedding-ada-002`  
-- `gpt-4o`  
+## ✅ Microsoft Fabric Requirements
+**Access options:**
+- Create a **new Microsoft Fabric trial**, or
+- Use an **already provisioned Fabric capacity** in your Azure subscription.
 
-Si la cuota actual es menor a **100.000**, solicita un aumento antes del evento para garantizar disponibilidad.  
-> ⏱️ Las aprobaciones suelen tardar 24 horas, por lo que es crítico completar este paso con antelación.  
-
-**Pasos recomendados:**  
-- Verifica tu cuota actual → [Guía de Cuotas de Azure OpenAI](#)  
-- Solicita aumento de cuota → [Solicitud de Aumento de Cuota](#)  
-
----
-
-## ✅ Requisitos de Red y Acceso  
-Asegura acceso sin restricciones a las siguientes plataformas:  
-- **Azure AI Foundry**  
-- **Azure Data Factory**  
-- **Document Intelligence Studio**  
-- **Portal de Azure**  
-- **Microsoft Fabric**  
+**Fabric configuration requirements:**
+- At least one member assigned as a **Microsoft Fabric administrator**.
+- A **Fabric workspace** assigned to the team.
+- Ability to create **Lakehouses** and **Semantic Models** in Fabric.
+- Access to **OneLake** (Fabric storage) to upload files.
 
 ---
 
-## ✅ Requisitos de Visual Studio Code  
-**Extensiones necesarias en VS Code:**  
-- Python 🐍  
-- Azure Tools ☁️  
-- Azure Semantic Kernel Tools 🧠  
+## ✅ Azure OpenAI Requirements
+**TPM quota for OpenAI models:**
+- `text-embedding-ada-002`
+- `gpt-4o`
+
+If the current quota is less than **100,000**, request an increase before the event to ensure availability.
+> ⏱️ Approvals usually take 24 hours, so it is critical to complete this step in advance.
+
+**Recommended steps:**
+- Check your current quota → [Azure OpenAI quotas guide](#)
+- Request a quota increase → [Quota increase request](#)
 
 ---
 
-## 🎯 Qué Esperar  
-- 💡 Retos técnicos prácticos  
-- 🤝 Colaboración con profesionales afines  
-- 🧩 Resolución de problemas en vivo y guía experta  
-- 🚀 Oportunidad para mejorar habilidades y generar ideas con nuestros equipos  
+## ✅ Network and Access Requirements
+Ensure unrestricted access to the following platforms:
+- **Azure AI Foundry**
+- **Azure Data Factory**
+- **Document Intelligence Studio**
+- **Azure Portal**
+- **Microsoft Fabric**
 
 ---
 
-## 🚀 Lista Final de Verificación  
-✔️ Completa todos los prerrequisitos antes del evento  
-✔️ Verifica tu acceso a **Azure**, **Microsoft Fabric** y **servicios de OpenAI**  
-✔️ Confirma que puedes acceder a **todos los recursos y herramientas necesarias**  
+## ✅ Visual Studio Code Requirements
+**Recommended VS Code extensions:**
+- Python 🐍
+- Azure Tools ☁️
+- Azure Semantic Kernel Tools 🧠
 
 ---
-# Requisitos Dia 2
 
-# 🔐 Roles en Azure y su Uso
+## 🎯 What to Expect
+- 💡 Hands-on technical challenges
+- 🤝 Collaboration with peers
+- 🧩 Live problem solving and expert guidance
+- 🚀 Opportunity to improve skills and generate ideas with our teams
 
-| **Rol en Azure** | **Uso Principal** |
-|------------------|-------------------|
-| **Owner o Contributor** | Permite **crear y administrar recursos** como *AI Services*, *Azure ML*, *App Services*, entre otros. |
-| **Cognitive Services Contributor** | Habilita la **configuración y administración de recursos de Cognitive Services**. |
-| **Storage Blob Data Contributor** | Brinda **acceso completo al almacenamiento** utilizado por *AI Foundry* (lectura, escritura y eliminación de blobs). |
-| **Azure OpenAI Contributor (si aplica)** | Otorga **acceso a modelos GPT, embeddings y otros servicios** de *Azure OpenAI*. |
-| **Key Vault Administrator (opcional)** | Permite **gestionar secretos, certificados y claves API** almacenadas en *Azure Key Vault*. |
+---
 
-## 🎉 ¡Nos vemos en el Hackathon!  
-Esperamos un evento **dinámico e inspirador** — y sobre todo, una **experiencia de aprendizaje enriquecedora para todos**.  
+## 🚀 Final Checklist
+✔️ Complete all prerequisites before the event
+✔️ Verify access to **Azure**, **Microsoft Fabric**, and **OpenAI services**
+✔️ Confirm access to **all required resources and tools**
 
-Si tienes preguntas o necesitas asistencia, **no dudes en contactarnos**.  
+---
 
-> 🚀 ¡Prepárate para innovar, colaborar y construir soluciones potenciadas por IA! 🎉
+# Day 2 Requirements
+
+# 🔐 Azure Roles and Their Purpose
+
+| **Azure Role** | **Primary Use** |
+|-----------------|------------------|
+| **Owner or Contributor** | Allows creating and managing resources such as *AI Services*, *Azure ML*, *App Services*, and more. |
+| **Cognitive Services Contributor** | Enables configuration and management of *Cognitive Services* resources. |
+| **Storage Blob Data Contributor** | Grants full access to storage used by *AI Foundry* (read, write, delete blobs). |
+| **Azure OpenAI Contributor (if applicable)** | Provides access to GPT models, embeddings and other *Azure OpenAI* services. |
+| **Key Vault Administrator (optional)** | Allows managing secrets, certificates and API keys stored in *Azure Key Vault*. |
+
+## 🎉 See you at the Hackathon!
+We look forward to a **dynamic and inspiring** event — and above all, a **rich learning experience for everyone**.
+
+If you have questions or need assistance, **please contact the organizers**.
+
+> 🚀 Get ready to innovate, collaborate and build AI-powered solutions! 🎉

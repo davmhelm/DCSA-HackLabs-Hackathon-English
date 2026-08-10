@@ -6,23 +6,23 @@
 </p>
 
 
-# 🧠 AI Fabric Hackathon  
+# 🧠 AI Fabric Hackathon
 
-## 🎯 Objetivos del Hackathon
+## 🎯 Hackathon Objectives
 
-Al finalizar este hackathon, los participantes serán capaces de:
+By the end of this hackathon, participants will be able to:
 
-- Preparar, transformar y enriquecer datos financieros, retail y transaccionales usando **Microsoft Fabric**, aplicando el modelo **medallion** para estructurar capas de valor analítico.  
-- Ingestar datos desde sistemas core, fuentes externas y APIs mediante **pipelines, notebooks y conectores nativos de Fabric**.  
-- Diseñar **modelos semánticos** robustos que faciliten el consumo de datos por analistas, auditores y sistemas de inteligencia.  
-- Monitorear y optimizar el consumo de capacidad en **Fabric**, aplicando métricas clave para gobernanza operativa y eficiencia de recursos.  
-- Construir **agentes de inteligencia artificial** con **AI Foundry** para análisis predictivo, detección de fraude y generación de insights financieros.  
-- Orquestar flujos multi-agente y procesos de datos, habilitando automatización inteligente en escenarios bancarios y de seguros.
-- Visualizar **insights estratégicos** con **Power BI en Microsoft Fabric**, habilitando tableros interactivos para decisiones basadas en datos.
-  
+- Prepare, transform, and enrich financial, retail, and transactional data using **Microsoft Fabric**, applying the **medallion** pattern to structure analytic value layers.
+- Ingest data from core systems, external sources, and APIs using **pipelines, notebooks and Fabric native connectors**.
+- Design robust **semantic models** that enable consumption by analysts, auditors, and intelligence systems.
+- Monitor and optimize capacity consumption in **Fabric**, applying key metrics for operational governance and resource efficiency.
+- Build **AI agents** with **AI Foundry** for predictive analysis, fraud detection and generation of financial insights.
+- Orchestrate multi-agent flows and data processes, enabling intelligent automation in banking and insurance scenarios.
+- Visualize **strategic insights** with **Power BI in Microsoft Fabric**, enabling interactive dashboards for data-driven decisions.
+
 **Bonus**
-- Aplicar **controles de seguridad y gobernanza** de datos sensibles, configurando roles, permisos y políticas en workspaces de Fabric.   
-- Integrar **Microsoft Purview** para trazabilidad, clasificación y cumplimiento normativo, fortaleciendo la gobernanza de datos en entornos regulados.  
+- Apply **security and governance controls** for sensitive data by configuring roles, permissions and policies in Fabric workspaces.
+- Integrate **Microsoft Purview** for traceability, classification and regulatory compliance, strengthening data governance in regulated environments.
 
 
 

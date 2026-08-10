@@ -10,38 +10,48 @@ Transformar los datos Bronze, realizar análisis exploratorio en Silver y finalm
 ## **Solución paso a paso 🪜**
 
 En este approcah se decidio trabajar tres productos de datos **Credit Scores** medallion + segmentacion de clientes con ML (KMeans), **Products** -medallion + segmentacion de productos por valor comercial con ML (KMeans), y **Business Operations** que combina tablas de transactions y products para modelar un analisis operacional de compras de clientes y productos. El ejercicio no pretende ejercer un modelado dimensional estricto y mas bien se invita a trabajar distintos enfoques, Fabric como herramienta se adapta a enfoqaues de modelado dimensional asi como enfoques de denormalizacion comunes en entornos de Big Data.
+# **Challenge 2 – Intermediate transformation, exploratory analysis (Silver) and Gold preparation 🔧📊**
 
-A continuacion la estructura utilizada:
+## **Goal and step-by-step solution 🧭**
 
-![Enfoque](/img/approach.png)
-
-
-
-
-### **Set de score crediticio🧩**  
-(Esto es un ejemplo de como trabajar el escenario financiero de credit, se puede hacer con otros enfoques)
-
-- Crear nuevo Dataflow Gen2 o Notebook para la capa Silver
-- Configurar el origen en las tablas Bronze.
-- Aplicar transformaciones intermedias 
-- Crear columna de score crediticio, derivadas
-- Segmentar clientes por perfil crediticio 
-- Guardar en el Lakehouse como tabla una tabla silver
-- Se crea un nuevo Notebook para la capa Gold de score crediticio
-- Configurar el origen en las tablas Silver.
-- Se identifica el cluster con mayor promedio de score 
-- Se filtran los clientes pertenecientes a ese cluster
-- Se almacenan los datos en la capa Gold
-- Resultado: subconjunto de clientes con perfil crediticio alto 
+### **Goal 🎯**
+Transform Bronze data, perform exploratory analysis in Silver, and finally build the Gold layer.
 
 ---
 
-# **CAPA SILVER - SCORE CREDITICIO**
+## **Step-by-step solution 🪜**
 
-# **Ejemplo -Creacion tablas silver - Score Crediticio  🧮**
+This approach uses three data products: **Credit Scores** (medallion + customer segmentation with ML KMeans), **Products** (medallion + product segmentation by commercial value with ML KMeans), and **Business Operations** which combines `transactions` and `products` tables to model operational analysis of customer purchases. The exercise is not intended to enforce a strict dimensional model; Fabric supports both dimensional modeling and denormalized approaches common in Big Data environments.
+
+The structure used is shown below:
+
+![Approach](/img/approach.png)
 
 
-## **Cargar tabla bronze con datos financieros 🧾**
+### **Credit score set 🧩**
+(This is an example for the financial credit scenario; other approaches are possible.)
+
+- Create a new Dataflow Gen2 or Notebook for the Silver layer
+- Configure the source from Bronze tables
+- Apply intermediate transformations
+- Create derived credit score columns
+- Segment customers by credit profile
+- Save as a Silver table in the Lakehouse
+- Create a new Notebook for the Gold layer of credit scoring
+- Configure the source from Silver tables
+- Identify the cluster with the highest average score
+- Filter customers that belong to that cluster
+- Store the results in the Gold layer
+- Result: a subset of customers with a high credit profile
+
+---
+
+# **SILVER LAYER - CREDIT SCORE**
+
+# **Example – Create Silver tables - Credit Score 🧮**
+
+
+## **Load Bronze table with financial data 🧾**
 
 ```python
 
@@ -50,7 +60,7 @@ df_fin = spark.sql("SELECT * FROM Contoso_Lakehouse.bronze.credit_score")
 
 ---
 
-## **Derivar columna score_estimado basada en comportamiento de pago y uso de crédito 💳**
+## **Derive `score_estimado` column based on payment behavior and credit usage 💳**
 
 ```python
 
@@ -67,17 +77,16 @@ df_fin = df_fin.withColumn("score_estimado",
 ```
 ---
 
-## **Penalización por pagos atrasados ⏰**
+## **Penalty for late payments ⏰**
 
 ```python
 df_fin = df_fin.withColumn("score_estimado", 
     col("score_estimado") - (col("Num_of_Delayed_Payment") * 5)
 )
 ```
-
 ---
 
-## **Penalización por alto uso de crédito 📉**
+## **Penalty for high credit utilization 📉**
 
 ```python
 df_fin = df_fin.withColumn("score_estimado", 
@@ -85,10 +94,9 @@ df_fin = df_fin.withColumn("score_estimado",
     .otherwise(col("score_estimado"))
 )
 ```
-
 ---
 
-## **Limitar score entre 300 y 850 ⚙️**
+## **Limit score between 300 and 850 ⚙️**
 
 ```python
 df_fin = df_fin.withColumn("score_estimado", 
@@ -97,25 +105,24 @@ df_fin = df_fin.withColumn("score_estimado",
     .otherwise(col("score_estimado"))
 )
 ```
-
 ---
 
-## **Filtrar registros válidos para clustering 🧹**
+## **Filter valid records for clustering 🧹**
 
 ```python
 df_fin_clean = df_fin.filter(col("score_estimado").isNotNull()) 
 
 ```
-
+ 
 ---
 
-## **Homologar columnas a lower case**
+## **Normalize column names to lower case**
 
 ```python
 df_fin_clean = df_fin_clean .toDF(*[c.lower() for c in df_fin_clean.columns])
 ```
 ---
-## **Filtrando clientes sin nulos/na + edades y cantidad de prestamos correctos**
+## **Filter out records with nulls/na and validate ages and loan counts**
 ```python
 df_fin_clean = df_fin_clean.dropna().filter(
 col("age").between(1, 120) & 
@@ -124,7 +131,7 @@ col("age").between(1, 120) &
 ```
 ---
 
-## **💾 Guardar tabla silver preparada**
+## **💾 Save prepared Silver table**
 
 ```python
 df_fin_clean.write.option("overwriteSchema", "true").mode("overwrite").saveAsTable("Contoso_Lakehouse.silver.credit_score") 
@@ -134,12 +141,12 @@ df_fin_clean.write.option("overwriteSchema", "true").mode("overwrite").saveAsTab
 ---
 
 
-# **CAPA GOLD - SCORE CREDITICIO**
+# **GOLD LAYER - CREDIT SCORE**
 
-# **Ejemplo -Segmentacion de clientes por score crediticio 🧮**
+# **Example – Customer segmentation by credit score 🧮**
 
 
-## **📌 Importar funciones necesarias**
+## **📌 Import required functions**
 
 ```python
 from pyspark.sql.functions import col, when, udf 
@@ -149,7 +156,7 @@ from pyspark.ml.clustering import KMeans
 ```
 
 
-## **Cargar tabla Silver con datos financieros preparados 🧾**
+## **Load prepared Silver table with financial data 🧾**
 
 ```python
 df_fin = spark.sql("SELECT * FROM Contoso_Lakehouse.silver.credit_score")
@@ -158,7 +165,7 @@ df_fin = spark.sql("SELECT * FROM Contoso_Lakehouse.silver.credit_score")
 
 ---
 
-## **Vectorizar columna score_estimado para ML 🤖**
+## **Vectorize `score_estimado` column for ML 🤖**
 
 ```python
 assembler = VectorAssembler(inputCols=["score_estimado"], outputCol="features") 
@@ -167,7 +174,7 @@ df_fin_vec = assembler.transform(df_fin_clean)
 
 ---
 
-## **Aplicar KMeans clustering para segmentar clientes 🧠**
+## **Apply KMeans clustering to segment customers 🧠**
 
 ```python
 kmeans = KMeans(k=3, seed=42) 
@@ -177,7 +184,7 @@ df_fin_clustered = model_fin.transform(df_fin_vec)
 
 ---
 
-## **Etiquetar perfiles crediticios según promedio de score por cluster 🏷️**
+## **Label credit profiles by average score per cluster 🏷️**
 
 ```python
 cluster_scores = df_fin_clustered.groupBy("prediction") \
@@ -188,7 +195,7 @@ cluster_scores = df_fin_clustered.groupBy("prediction") \
 
 ---
 
-## **Crear mapa de etiquetas: Alto, Medio, Bajo 🗺️**
+## **Create label map: High, Medium, Low 🗺️**
 
 ```python
 cluster_map = {} 
@@ -198,7 +205,7 @@ for i, row in enumerate(cluster_scores):
 
 ---
 
-## **UDF para asignar etiqueta ⚡**
+## **UDF to assign label ⚡**
 
 ```python
 def map_cluster(pred): 
@@ -210,7 +217,7 @@ df_segmentado = df_fin_clustered.withColumn("perfil_crediticio", map_udf(col("pr
 
 ---
 
-## **Contar clientes por perfil (opcional para validación) 📊**
+## **Count customers by profile (optional for validation) 📊**
 
 ```python
 df_segmentado.groupBy("perfil_crediticio").count().orderBy("count", ascending=False).show() 
@@ -218,8 +225,8 @@ df_segmentado.groupBy("perfil_crediticio").count().orderBy("count", ascending=Fa
 
 ---
 
-## **Filtrar clientes por perfil🥇**
-**NOTA**: Este paso puede ajustarse si se desea analizar todos los tiers o solo los de perfil alto (valioso)
+## **Filter customers by profile 🥇**
+**NOTE**: This step can be adjusted to analyze all tiers or only high-profile customers
 
 ```python
 #df_gold_fin = df_segmentado.filter(col("perfil_crediticio") == "Alto") 
@@ -229,7 +236,7 @@ df_gold_fin = df_segmentado
 
 ---
 
-## **Eliminar columnas innecesarias de ML**
+## **Drop ML helper columns**
 
 ```python
 drop_columns = ["features", "prediction"]
@@ -238,7 +245,7 @@ df_gold_fin = df_gold_fin.drop(*drop_columns)
 
 ---
 
-## **Guardar tabla Gold con clientes de mejor perfil crediticio 💾**
+## **Save Gold table with top-tier customers 💾**
 
 ```python
 df_gold_fin.write.option("mergeSchema", "true").mode("overwrite").saveAsTable("Contoso_Lakehouse.gold.credit_score") 
@@ -247,30 +254,25 @@ df_gold_fin.write.option("mergeSchema", "true").mode("overwrite").saveAsTable("C
 
 ---
 
-### **Set de Retail por Producto🧩**  
-(Esto es un ejemplo de como trabajar el escenario de score, se puede hacer con otros enfoques)
+### **Retail set by Product 🧩**
+(This is another example; apply similar steps to product scenarios)
 
-- Crear nuevo Dataflow Gen2 o Notebook para la capa Silver
-- Configurar el origen en las tablas Bronze.
-- Aplicar transformaciones intermedias 
-- Crear columnas derivadas
-- Segmentar clientes por perfil crediticio 
-- Guardar en el Lakehouse como tabla una tabla silver
-- Se crea un nuevo Notebook para la capa Gold de score crediticio
-- Configurar el origen en las tablas Silver.
-- Se identifica el cluster con mayor promedio de score 
-- Se filtran los clientes pertenecientes a ese cluster
-- Se almacenan los datos en la capa Gold
-- Resultado: subconjunto de clientes con perfil crediticio alto 
+- Create a new Dataflow Gen2 or Notebook for Silver
+- Configure the source from Bronze tables
+- Apply intermediate transformations
+- Create derived columns
+- Segment products/customers
+- Save as a Silver table and prepare Gold
+- Result: curated subsets ready for Gold
 
 
-# **CAPA SILVER - RETAIL**
+# **SILVER LAYER - RETAIL**
 
-# **Ejemplo -Creacion tablas silver - Retail  🧮**
+# **Example – Create Silver tables - Retail 🧮**
 
 ---
 
-## **📌 Importar funciones necesarias**
+## **📌 Import required functions**
 
 ```python
 from pyspark.sql.functions import col, when, udf 
@@ -280,7 +282,7 @@ from pyspark.sql.types import StringType
 
 ---
 
-## **Cargar tabla Silver con catálogo de productos retail 🧾**
+## **Load Silver table with retail product catalog 🧾**
 
 ```python
 df_retail = spark.read.table("productos_silver") 
@@ -288,7 +290,7 @@ df_retail = spark.read.table("productos_silver")
 
 ---
 
-## **🧮 Derivar columna valor_comercial = Price × Stock**
+## **🧮 Derive `valor_comercial` = Price × Stock**
 
 ```python
 df_retail = df_retail.withColumn("valor_comercial", col("Price") * col("Stock")) 
@@ -296,7 +298,7 @@ df_retail = df_retail.withColumn("valor_comercial", col("Price") * col("Stock"))
 
 ---
 
-## **🧮 Derivar columna disponibilidad_binaria**
+## **🧮 Derive binary availability column**
 
 ```python
 df_retail = df_retail.withColumn("disponible", 
@@ -306,7 +308,7 @@ df_retail = df_retail.withColumn("disponible",
 
 ---
 
-## **🧹 Filtrar registros válidos para clustering**
+## **🧹 Filter valid records for clustering**
 
 ```python
 df_retail_clean = df_retail.filter( 
@@ -316,14 +318,14 @@ df_retail_clean = df_retail.filter(
 
 ---
 
-## **Homologar columnas a lower case**
+## **Normalize column names to lower case**
 
 ```python
 df_fin_clean = df_fin_clean .toDF(*[c.lower() for c in df_fin_clean.columns])
 ```
 ---
 
-## **💾 Guardar tabla silver preparada**
+## **💾 Save prepared Silver table**
 
 ```python
 df_retail_clean.write.option("overwriteSchema", "true").mode("overwrite").saveAsTable("Contoso_Lakehouse.silver.products") 
@@ -334,13 +336,13 @@ df_retail_clean.write.option("overwriteSchema", "true").mode("overwrite").saveAs
 
 
 
-# **CAPA GOLD - RETAIL**
+# **GOLD LAYER - RETAIL**
 
-# **Ejemplo -Segmentacion de productos🧮**
+# **Example – Product segmentation 🧮**
 
 ---
 
-## **📌 Importar funciones necesarias**
+## **📌 Import required functions**
 
 ```python
 from pyspark.sql.functions import col, when, udf 
@@ -350,7 +352,7 @@ from pyspark.ml.clustering import KMeans
 ```
 ---
 
-## **📊 Vectorizar columnas para ML**
+## **📊 Vectorize columns for ML**
 
 ```python
 assembler = VectorAssembler(inputCols=["valor_comercial", "disponible"], outputCol="features") 
@@ -359,7 +361,7 @@ df_retail_vec = assembler.transform(df_retail_clean)
 
 ---
 
-## **🤖 Aplicar KMeans clustering para segmentar productos**
+## **🤖 Apply KMeans clustering to segment products**
 
 ```python
 kmeans = KMeans(k=3, seed=42) 
@@ -369,7 +371,7 @@ df_retail_clustered = model_retail.transform(df_retail_vec)
 
 ---
 
-## **🏷️ Etiquetar productos según valor comercial promedio por cluster**
+## **🏷️ Label products by average commercial value per cluster**
 
 ```python
 cluster_scores = df_retail_clustered.groupBy("prediction") \
@@ -380,7 +382,7 @@ cluster_scores = df_retail_clustered.groupBy("prediction") \
 
 ---
 
-## **Crear mapa de etiquetas: Valioso, Medio, Bajo 🗺️**
+## **Create label map: Valuable, Medium, Low 🗺️**
 
 ```python
 cluster_map = {} 
@@ -390,7 +392,7 @@ for i, row in enumerate(cluster_scores):
 
 ---
 
-## **UDF para asignar etiqueta ⚡**
+## **UDF to assign label ⚡**
 
 ```python
 def map_cluster(pred): 
@@ -398,16 +400,6 @@ def map_cluster(pred):
 
 map_udf = udf(map_cluster, StringType()) 
 df_segmentado = df_retail_clustered.withColumn("perfil_producto", map_udf(col("prediction"))) 
-```
-
----
-
-## **🔍 Conteo por perfil (opcional para validación)**
-
-```python
-df_segmentado.groupBy("perfil_producto").count().orderBy("count", ascending=False).show() 
-```
-
 ---
 
 ## **🥇 Filtrar productos disponibles**
