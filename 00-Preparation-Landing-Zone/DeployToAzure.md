@@ -61,5 +61,5 @@ In a few minutes, the environment will be ready.
 
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](
-https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmakanto32%2FHackathon-Mexico%2Fmain%2F00-Preparacion%2520Landing%2520Zone%2Fazuredeploy.json
+https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDCSA-HackLabs%2FHackathon-English%2Frefs%2Fheads%2Fmain%2F00-Preparation-Landing-Zone%2Fazuredeploy.json
 )
