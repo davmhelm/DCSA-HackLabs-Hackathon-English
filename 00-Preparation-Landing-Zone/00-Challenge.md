@@ -83,11 +83,11 @@ With the **landing zone** configured, you are ready to proceed to the next chall
 ---
 
 **📄 Documentation**
-- [Create Cosmos DB (NoSQL)](https://learn.microsoft.com/es-es/azure/cosmos-db/nosql/quickstart-portal)
-- [Allow public IP in Firewall](https://learn.microsoft.com/en-us/azure/devops/organizations/security/allow-list-ip-url?view=azure-devops&tabs=IP-V4)
-- [Create Fabric workspace](https://learn.microsoft.com/es-es/fabric/data-warehouse/tutorial-create-workspace)
-- [Create Fabric lakehouse](https://learn.microsoft.com/es-es/fabric/data-engineering/tutorial-build-lakehouse)
-- [Create Pipeline](https://learn.microsoft.com/es-mx/fabric/data-factory/create-first-pipeline-with-sample-data)
+- [Create Cosmos DB (NoSQL)](https://learn.microsoft.com/azure/cosmos-db/nosql/quickstart-portal)
+- [Allow public IP in Firewall](https://learn.microsoft.com/azure/devops/organizations/security/allow-list-ip-url?view=azure-devops&tabs=IP-V4)
+- [Create Fabric workspace](https://learn.microsoft.com/fabric/data-warehouse/tutorial-create-workspace)
+- [Create Fabric lakehouse](https://learn.microsoft.com/fabric/data-engineering/tutorial-build-lakehouse)
+- [Create Pipeline](https://learn.microsoft.com/fabric/data-factory/create-first-pipeline-with-sample-data)
 
 
 

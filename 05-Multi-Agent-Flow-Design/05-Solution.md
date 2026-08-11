@@ -331,8 +331,8 @@ When searching:
 
     
     **Count**: Number of search results Bing will return. Recommended 5 for quick searches, 10 for deeper analysis
-    **Set language**: Result language (for Spanish set to **es**)
-    **Market**: Market region for localized results (e.g., **es-mx**)
+    **Set language**: Result language (for English set to **en**)
+    **Market**: Market region for localized results (e.g., **en-us**)
     **Freshness**: Freshness filter date in format *YYYY-MM-DD*. Optional.
 
  
@@ -398,234 +398,235 @@ You will receive context from other agents in the following format:
 ## RESPONSE STRUCTURE
 Format your response as:
 ```
-**Resumen Ejecutivo:**
-[Resumen de un párrafo del hallazgo clave]
+**Executive Summary:**
+[One-paragraph summary of the key finding]
 
-**Desempeño Interno:**
-[Resumen de datos internos - ventas, perfiles de clientes]
+**Internal Performance:**
+[Summary of internal data—sales and customer profiles]
 
-**Contexto de Mercado:**
-[Resumen de tendencias externas de mercado y datos de competidores]
+**Market Context:**
+[Summary of external market trends and competitor data]
 
-**Insights Estratégicos:**
-[Correlaciones clave, brechas u oportunidades identificadas]
+**Strategic Insights:**
+[Key correlations, gaps, or identified opportunities]
 
-**Recomendaciones:**
-1. [Recomendación específica y accionable]
-2. [Recomendación específica y accionable]
-3. [Recomendación específica y accionable]
+**Recommendations:**
+1. [Specific, actionable recommendation]
+2. [Specific, actionable recommendation]
+3. [Specific, actionable recommendation]
 
-**Riesgos y Consideraciones:**
-[Desafíos potenciales o advertencias]
+**Risks and Considerations:**
+[Potential challenges or caveats]
 
-## LINEAMIENTOS CRÍTICOS
-1. No todas las consultas activarán los 3 agentes. Sintetiza SOLO con las fuentes que participaron en esta conversación. Si un agente no respondió, omite esa sección de tu respuesta y no especules sobre esa área.
-2. Si solo recibiste información de 2 fuentes, adapta tu estructura omitiendo la sección del agente ausente. Tu síntesis sigue siendo valiosa aunque no estén las 3 fuentes.
-3. Siempre integra TODAS las fuentes que sí estén disponibles
-4. Identifica correlaciones entre datos internos y externos
-5. Señala discrepancias o brechas entre las fuentes
-6. Prioriza recomendaciones accionables
-7. Sé específico con números y métricas cuando estén disponibles
-8. Reconoce limitaciones de datos
-9. Considera tanto oportunidades COMO riesgos
+## CRITICAL GUIDELINES
+1. Not every query will activate all three agents. Synthesize information ONLY from the sources that participated in the conversation. If an agent did not respond, omit that section and do not speculate about that domain.
+2. If you received information from only two sources, adapt the structure by omitting the absent agent's section. The synthesis remains valuable even when all three sources are not available.
+3. Always incorporate ALL available sources.
+4. Identify correlations between internal and external data.
+5. Highlight discrepancies or gaps between sources.
+6. Prioritize actionable recommendations.
+7. Use specific numbers and metrics when available.
+8. Acknowledge data limitations.
+9. Consider both opportunities AND risks.
 
-## FUENTES AUSENTES
-Si en el historial ves que un agente respondió únicamente [SKIP], 
-ignora completamente esa fuente en tu síntesis.
+## MISSING SOURCES
+If an agent responded only with [SKIP] in the conversation history,
+exclude that source completely from your synthesis.
 
-## EJEMPLO DE SÍNTESIS
-Si los datos internos muestran ventas de iPhone decreciendo pero el mercado muestra crecimiento:
-- **Brecha:** "Nuestras ventas de iPhone cayeron 5% mientras el mercado creció 8%, sugiriendo que estamos perdiendo participación de mercado"
-- **Insight:** "Esta brecha de 13 puntos indica desventaja competitiva o problemas de precios"
-- **Recomendación:** "Analizar precios de competidores y considerar estrategia promocional"
+## SYNTHESIS EXAMPLE
+If internal data shows declining iPhone sales while the overall market is growing:
+- **Gap:** "Our iPhone sales declined by 5% while the market grew by 8%, suggesting that we are losing market share."
+- **Insight:** "This 13-percentage-point gap indicates a competitive disadvantage or pricing issues."
+- **Recommendation:** "Analyze competitor pricing and consider a promotional strategy."
 
-## LO QUE NO HACES
-- No consultes bases de datos directamente (recibes datos pre-analizados)
-- No busques en la web (recibes resultados de investigación de mercado)
-- No tomes decisiones - proporcionas recomendaciones
-- No especules más allá de los datos proporcionados
+## WHAT YOU DO NOT DO
+- Do not query databases directly; you receive pre-analyzed data.
+- Do not search the web; you receive market-research results.
+- Do not make decisions; provide recommendations.
+- Do not speculate beyond the supplied data.
 
-Tu valor está en conectar los puntos entre dominios para generar insights estratégicos que los agentes individuales no pueden proporcionar.
+Your value lies in connecting insights across domains to generate strategic findings that individual agents cannot produce.
 ```
 
-✅ **Resultado esperado:** Tenemos ahora un agente coordinador creado que de momento no esta vinculado con ningún flujo
+✅ **Expected result:** A coordinator agent has now been created. It is not yet connected to a workflow.
 
 ![New Foundry](/img/supervisor.png)
 
 
 ---
 
-### 4.5 - Crear el Router Agent (Orquestador Silencioso) 
+### 4.5 - Create the Router Agent (Silent Orchestrator)
 
-El Router Agent es el cerebro del flujo. Analiza la consulta del usuario y decide en silencio a qué agente dirigirla, emitiendo **un único tag** que el workflow intercepta con condiciones Power Fx. **No responde al usuario directamente**.
+The Router Agent is the workflow’s routing component. It analyzes the user query and silently determines which agent should process it by emitting **exactly one tag**. The workflow evaluates this tag using Power Fx conditions. The Router Agent **does not respond directly to the user**.
 
-**Crear el agente**
-- Repite los pasos de creación de agentes anteriores
+**Create the agent**
+- Repeat the agent-creation steps used previously
 - Name: **Contoso-Router-Agent**
-- No vincules ningún tool — este agente trabaja solo con el texto del query
+- Do not attach any tools; this agent operates only on the query text
 
 **Instructions (system prompt)**
 
 ```
-Eres el enrutador inteligente del sistema multi-agente de Contoso. Tu ÚNICA tarea es analizar la consulta del usuario y decidir qué agentes especializados deben responderla.
+You are the intelligent router for Contoso's multi-agent system. Your ONLY task is to analyze the user's query and determine which specialized agents should process it.
 
-## REGLA CRÍTICA
-No respondas en lenguaje natural. No saludes. No expliques nada.
-Tu respuesta debe contener ÚNICAMENTE un tag, en una sola línea.
+## CRITICAL RULE
+Do not respond in natural language. Do not greet the user or provide an explanation.
+Your response must contain EXACTLY one tag on a single line.
 
-## LOS TAGS DISPONIBLES
-- [SALES]  → Solo ventas internas
-- [MARKET] → Solo mercado externo
-- [CREDIT] → Solo perfiles de clientes
-- [CROSS]  → Pregunta involucra 2 o más dominios
+## AVAILABLE TAGS
+- [SALES]  → Internal sales only
+- [MARKET] → External market only
+- [CREDIT] → Customer profiles only
+- [CROSS]  → The question involves two or more domains
 
-## CUÁNDO EMITIR CADA TAG
+## WHEN TO EMIT EACH TAG
 
-**[SALES]** — Emite este tag si la consulta menciona o implica:
-- Ventas, revenue, ingresos, transacciones
-- Productos, categorías, inventario, SKUs
-- Canales de venta (online, tienda física, MSI)
-- Tickets, órdenes, volumen de ventas
-- Performance interno, comparativas de productos propios
-- Palabras clave: "ventas", "revenue", "productos", "categoría", "canal", "ticket", "iPhone", "laptop", "electronics", "sales"
+**[SALES]** — Emit this tag if the query mentions or implies:
+- Sales, revenue, income, or transactions
+- Products, categories, inventory, or SKUs
+- Sales channels (online, physical stores, or interest-free installments)
+- Receipts, orders, or sales volume
+- Internal performance or comparisons between the company's products
+- Keywords: "sales", "revenue", "products", "category", "channel", "receipt", "iPhone", "laptop", "electronics"
 
-**[MARKET]** — Emite este tag si la consulta menciona o implica:
-- Tendencias del mercado o la industria
-- Competidores, benchmarks, precios externos
-- Contexto externo, comportamiento del consumidor
-- Palabras clave: "mercado", "tendencias", "competencia", "benchmark", "industria", "market", "trend", "competidor", "precio competitivo", "externo"
+**[MARKET]** — Emit this tag if the query mentions or implies:
+- Market or industry trends
+- Competitors, benchmarks, or external pricing
+- External context or consumer behavior
+- Keywords: "market", "trends", "competition", "benchmark", "industry", "competitor", "competitive price", "external"
 
-**[CREDIT]** — Emite este tag si la consulta menciona o implica:
-- Perfiles crediticios o segmentos de clientes
-- Capacidad de pago, scores crediticios
-- Clientes Premium, Alto, Medio, Bajo
-- Riesgo financiero, deuda, comportamiento de pago
-- Palabras clave: "cliente", "customer", "crédito", "credit", "perfil", "profile", "score", "segmento", "capacidad de pago", "riesgo"
+**[CREDIT]** — Emit this tag if the query mentions or implies:
+- Credit profiles or customer segments
+- Payment capacity or credit scores
+- Premium, High, Medium, or Low customer classifications
+- Financial risk, debt, or payment behavior
+- Keywords: "customer", "credit", "profile", "score", "segment", "payment capacity", "risk"
 
-**[CROSS]** — Emite este tag si la consulta involucra 2 o más dominios:
-- Comparación interna vs mercado externo
-- Recomendaciones por perfil de cliente considerando tendencias
-- Análisis que cruza ventas + crédito, ventas + mercado, o los tres
+**[CROSS]** — Emit this tag if the query involves two or more domains:
+- Internal performance compared with the external market
+- Customer-profile recommendations based on market trends
+- Analysis combining sales and credit, sales and market, or all three domains
 
-## EJEMPLOS DE RUTEO
-Consulta: "¿Cuáles son nuestras ventas de iPhone este año?"
-Respuesta: [SALES]
+## ROUTING EXAMPLES
+Query: "What were our iPhone sales this year?"
+Response: [SALES]
 
-Consulta: "¿Cuáles son las tendencias del mercado para smartphones en 2024?"
-Respuesta: [MARKET]
+Query: "What are the smartphone market trends for 2024?"
+Response: [MARKET]
 
-Consulta: "¿Cuántos clientes de perfil Alto tenemos?"
-Respuesta: [CREDIT]
+Query: "How many customers have a High credit profile?"
+Response: [CREDIT]
 
-Consulta: "¿Cómo se comparan nuestras ventas de iPhone vs las tendencias del mercado?"
-Respuesta: [CROSS]
+Query: "How do our iPhone sales compare with market trends?"
+Response: [CROSS]
 
-Consulta: "¿Qué productos premium deberíamos recomendar a clientes de perfil Alto según las tendencias actuales?"
-Respuesta: [CROSS]
+Query: "Which premium products should we recommend to High-profile customers based on current trends?"
+Response: [CROSS]
 
-Consulta: "¿Nuestros precios en laptops son competitivos según el mercado?"
-Respuesta: [CROSS]
+Query: "Are our laptop prices competitive with the market?"
+Response: [CROSS]
 
-Consulta: "¿Cuál es el score promedio de nuestros clientes Premium?"
-Respuesta: [CREDIT]
+Query: "What is the average credit score of our Premium customers?"
+Response: [CREDIT]
 
-## REGLAS ADICIONALES
-- Responde SIEMPRE con un único tag
-- Ante duda entre un dominio solo o cruce, prefiere [CROSS]
+## ADDITIONAL RULES
+- ALWAYS respond with exactly one tag.
+- If uncertain whether a query belongs to one domain or spans domains, prefer [CROSS].
 ```
 
-**Validar el Router Agent**
+**Validate the Router Agent**
 
-Antes de integrarlo al workflow, prueba el Router Agent en el Playground con estas consultas y verifica que emita el tag correcto:
+Before integrating it into the workflow, test the Router Agent in the Playground with the following queries and verify that it emits the correct tag:
 
-| Consulta de prueba | Tag esperado |
+| Test query | Expected tag |
 |---|---|
-| ¿Cuáles son nuestras ventas de laptop este año? | `[SALES]` |
-| ¿Cuáles son las tendencias del mercado para laptops? | `[MARKET]` |
-| ¿Cuántos clientes tenemos con perfil crediticio Alto? | `[CREDIT]` |
-| ¿Cómo se comparan nuestros precios de laptop vs el mercado? | `[CROSS]` |
-| ¿Qué productos premium recomendar a clientes de perfil Alto según tendencias? | `[CROSS]` |
+| What were our laptop sales this year? | `[SALES]` |
+| What are the current laptop market trends? | `[MARKET]` |
+| How many customers have a High credit profile? | `[CREDIT]` |
+| How do our laptop prices compare with the market? | `[CROSS]` |
+| Which premium products should we recommend to High-profile customers based on current trends? | `[CROSS]` |
 
-✅ **Resultado esperado:** El Router Agent responde con un único tag, sin texto adicional.
+✅ **Expected result:** The Router Agent responds with exactly one tag and no additional text.
 
 ![New Foundry](/img/router-agent.png)
 
 ---
 
-### 5 - Crear el Workflow Multi-Agente
+### 5 - Create the Multi-Agent Workflow
 
-**Configuración Inicial del Workflow**
+**Initial workflow configuration**
 
-Para poder construir un workflow multi-agente existen varias opciones pro-code como el uso de **Semantic Kernel** o **AutoGen** ahora fusionados dentro del [Microsoft Agent Framework](https://learn.microsoft.com/en-us/agent-framework/overview/agent-framework-overview). Recientemente AI Foundry anunció un nuevo método llamado **Workflows** de bajo-código que permite realizar estos flujos de forma visual facilitando el proceso.
+Several pro-code options are available for building multi-agent workflows, including **Semantic Kernel** and **AutoGen**, which are now consolidated under the [Microsoft Agent Framework](https://learn.microsoft.com/agent-framework/overview/agent-framework-overview). Microsoft Foundry recently introduced **Workflows**, a low-code visual approach that simplifies the creation of these workflows.
 
-Para este ejercicio vamos a utilizar este método.
+This exercise uses the Workflows approach.
 
-**Nota**: Antes de construir el flujo asegúrate de que tienes construidos los 5 agentes: Router, Sales, Market Research, Credit Risk y Strategy Advisor.
+**Note:** Before building the workflow, ensure that all five agents have been created: Router, Sales, Market Research, Credit Risk, and Strategy Advisor.
 
-**Navegar a Workflows**
-- En el portal de AI Foundry estando dentro de la opción **Build** navegamos al menú lateral → **Workflows**
+**Navigate to Workflows**
+- In the AI Foundry portal, navigate to **Build**→**Workflows**
 
   ![New Foundry](/img/workflow1.png)
 
-- Click en **Create** y en la lista desplegable seleccionamos **Sequential**. Diseñaremos el flujo desde 0 comenzando con el nodo **Start**.
+- Select **Create**, and then select **Sequential** from the drop-down list. Build the workflow from scratch, beginning with the **Start** node.
 
   ![New Foundry](/img/workflow2.png)
 
 ---
 
-**Configurar Nodos del Workflow**
+**Configure the workflow nodes**
 
-**Nodo Start**: Ya está creado. Agrega una nota opcional para documentar el flujo.
+**Start node:** This node already exists. Optionally add a note documenting the workflow.
 
 ---
 
-**Agregar Nodos: Set Variable — Capturar Query del Usuario**
+**Add node: Set Variable — capture the user query**
 
-Agregamos dos nodos de variable al inicio para preservar el query original y restaurarlo antes de cada agente.
+Add two variable nodes at the beginning to preserve the original query and restore it before each agent invocation.
 
-- Click en **+** → **Set variable**
+- Click **+** → **Set variable**
   - **Variable name**: `UserQuestion`
   - **Value**: `=System.LastMessageText`
-- Click en **+** → **Set variable**
+- Click **+** → **Set variable**
   - **Variable name**: `LatestMessage`
   - **Value**: `=UserMessage(Local.UserQuestion)`
 
-*¿Por qué dos variables?* `Local.UserQuestion` guarda el texto plano del query original y no se modifica en ningún momento del flujo. `Local.LatestMessage` es la variable "activa" que cada agente recibe como input y sobreescribe con su respuesta. Antes de invocar cada agente especializado hacemos un `restore` — es decir, reasignamos `Local.LatestMessage` desde `Local.UserQuestion` — para garantizar que cada agente recibe la pregunta original del usuario y no la respuesta del agente anterior.
+**Why are two variables required?** `Local.UserQuestion` stores the original query as plain text and is never modified. `Local.LatestMessage` is the active variable received and overwritten by each agent. Before invoking each specialized agent, restore `Local.LatestMessage` from `Local.UserQuestion`. This ensures that every agent receives the original user question rather than the preceding agent’s response.
 
 ![New Foundry](/img/workflow3.png) ![New Foundry](/img/workflow3.1.png)
 
 ---
 
-**Agregar Nodo: Invoke Router Agent**
+**Add node: Invoke Router Agent**
 
-Este es el primer agente que se ejecuta. Trabaja en silencio y su tag dirige el flujo.
+This is the first agent invoked. It operates silently, and its tag determines the workflow route.
 
-- Click en **+** → **Invoke agent**
-- Configura:
+- Click **+** → **Invoke agent**
+- Configure:
   - **Select an agent**: `Contoso-Router-Agent`
   - **Conversation context**: `System.ConversationId`
   - **Input message**: `=Local.LatestMessage`
-  - **Automatically include agent response**: ❌ **Desactivado** (trabaja en silencio)
-  - **Save agent output message as**: `LatestMessage` → se guarda como `Local.LatestMessage`
-- Presiona **Done**
+  - **Automatically include agent response**: ❌ **Disabled** (the agent operates silently)
+  - **Save agent output message as**: `LatestMessage` → stored as `Local.LatestMessage`
+- Select **Done**
 
 ![New Foundry](/img/workflow4.png)
 
 ---
 
-**Agregar Nodo: ConditionGroup — Routing**
+**Add node: ConditionGroup — Routing**
 
-Este es el nodo central. Evalúa el tag que emitió el Router y dirige el flujo.
+This is the central routing node. It evaluates the tag emitted by the Router Agent and directs the workflow accordingly.
 
-- Click en **+** → **If/Else**
+- Click **+** → **If/Else**
 
-*Nota sobre el patrón `restore`:* Dentro de cada rama, antes de invocar al agente especializado, siempre agregamos un nodo **Set variable** que reasigna `Local.LatestMessage = UserMessage(Local.UserQuestion)`. Esto es necesario porque después del Router Agent, `Local.LatestMessage` contiene la respuesta del Router (los tags), no el query del usuario. Sin el restore, el agente especializado recibiría `[SALES]` como input en lugar de la pregunta original.
+**Note about the `restore` pattern:** Within each branch, before invoking the specialized agent, always add a **Set variable** node that assigns `Local.LatestMessage = UserMessage(Local.UserQuestion)`. This is necessary because, after the Router Agent runs, `Local.LatestMessage` contains the Router Agent’s response—the routing tag—not the user’s query. Without restoring the variable, the specialized agent would receive `[SALES]` as input instead of the original question.
+
 
 **Condition 1 — `[SALES]`:**
 ```
 =!IsBlank(Find("[SALES]", Upper(Last(Local.LatestMessage).Text)))
 ```
-Acciones (rama YES):
+Actions (YES branch):
 - **Set variable**: `LatestMessage` = `=UserMessage(Local.UserQuestion)`
 - **Invoke agent**: `Contoso-Sales-Analyst` → output: `Local.LatestMessage`, autoSend: false
 - **End Conversation**
@@ -639,7 +640,7 @@ Acciones (rama YES):
 ```
 =!IsBlank(Find("[MARKET]", Upper(Last(Local.LatestMessage).Text)))
 ```
-Acciones (rama YES):
+Actions (YES branch):
 - **Set variable**: `LatestMessage` = `=UserMessage(Local.UserQuestion)`
 - **Invoke agent**: `Contoso-Market-Research-Analyst` → output: `Local.LatestMessage`, autoSend: false
 - **End Conversation**
@@ -652,7 +653,7 @@ Acciones (rama YES):
 ```
 =!IsBlank(Find("[CREDIT]", Upper(Last(Local.LatestMessage).Text)))
 ```
-Acciones (rama  YES):
+Actions (YES branch):
 - **Set variable**: `LatestMessage` = `=UserMessage(Local.UserQuestion)`
 - **Invoke agent**: `Contoso-Credit-Risk-Analyst` → output: `Local.LatestMessage`, autoSend: false
 - **End Conversation**
@@ -662,9 +663,10 @@ Acciones (rama  YES):
  ![New Foundry](/img/ifelse8.png)
  
 
-**elseActions — `[CROSS]` (o cualquier caso no capturado):**
+**elseActions — `[CROSS]` (or any unmatched case):**
 
-Cuando el Router emite `[CROSS]`, ninguna condición individual es verdadera y el flujo cae aquí. Se ejecutan los 3 agentes en secuencia y el Strategy Advisor sintetiza.
+When the Router Agent emits `[CROSS]`, none of the individual conditions evaluate to true, so execution proceeds to `elseActions`. The three specialized agents run sequentially, and the Strategy Advisor synthesizes their results.
+
 
 - **Set variable**: `LatestMessage` = `=UserMessage(Local.UserQuestion)`
 - **Invoke agent**: `Contoso-Sales-Analyst` → output: `Local.sales_output` (guardamos el output en una variable), autoSend: false
@@ -679,128 +681,126 @@ Cuando el Router emite `[CROSS]`, ninguna condición individual es verdadera y e
 ![New Foundry](/img/else3.png)
 ![New Foundry](/img/else4.png)
 
-
 ---
 
-**Guardar el Workflow**
-- Click en **Save** y nómbralo **Workflow-Multi-Agente-Contoso**
+**Save the Workflow**
+- Click **Save** and name it **Workflow-Multi-Agente-Contoso**
 
 ![New Foundry](/img/workflow9.png)
 
 ---
 
-**Opción alternativa: YAML**
+**Alternative option: YAML**
 
-Si prefieres cargar el workflow directamente vía YAML en lugar de construirlo nodo a nodo, abre la pestaña **YAML** en el canvas y pega el contenido del archivo [workflow-multi-agente-contoso](/workflow-multi-agente-contoso.yaml) incluido en este repositorio. Luego regresa a la pestaña **Visualizer** para verificar la estructura y guarda.
+If you prefer to load the workflow directly from YAML instead of building it node by node, open the **YAML** tab on the canvas and paste the contents of [workflow-multi-agente-contoso](/workflow-multi-agente-contoso.yaml), which is included in this repository. Then return to the **Visualizer** tab to verify the structure and save the workflow.
 
+### 6 - Test and validate the Multi-Agent Workflow
+In this step, validate the workflow with questions that test the Router Agent’s intelligent routing.
 
-### 6 - Testing y Validación el Workflow Multi-Agente
-En este paso vamos a validar el flujo con preguntas que pongan a prueba el enrutamiento inteligente del Router Agent.
+**Workflow preview**
 
-**Preview del Workflow**
+Scenario 1:
 
-Escenario 1:
-
-**Query de un solo dominio — solo Sales**
-- Click en **Preview** en la parte superior
-- Esto abrirá una ventana de chat
-- Agregamos una pregunta de prueba y ejecutamos
+**Single-domain query — Sales only**
+- Select **Preview** at the top
+- A chat window opens
+- Enter and submit the following test question:
 
   ```
-  ¿Cuál es el top 5 de productos más vendidos durante el 2024?
+  What were the top five best-selling products in 2024?
   ```
 
-Flujo esperado:
+Expected flow:
 
-✅ Router Agent analiza la consulta → emite `[SALES]`  
-✅ Condition `[SALES]` es verdadera → Sales Agent se ejecuta  
-⏭️ Market Research y Credit Risk se SALTAN  
-⏭️ Strategy Advisor se SALTA (no es caso `[CROSS]`)  
-✅ Respuesta directa del Sales Agent al usuario  
+✅ The Router Agent analyzes the query and emits `[SALES]`
+✅ The `[SALES]` condition evaluates to true, and the Sales Agent runs
+⏭️ The Market Research and Credit Risk agents are skipped
+⏭️ The Strategy Advisor is skipped (this is not a `[CROSS]` query)
+✅ The Sales Agent responds to the user
 
 ![New Foundry](/img/workflow11.png)
 
 ---
 
-Escenario 2:
+Scenario 2:
 
-**Query cross-dominio — Sales + Market + Strategy Advisor**
-- Click en **Preview**
-- Agregamos una pregunta de prueba y ejecutamos
+**Cross-domain query — Sales + Market + Strategy Advisor**
+- Click **Preview**
+- Enter and submit the following test question
 
   ```
-  ¿Cómo se comparan nuestras ventas de smartphone con las tendencias del mercado?
+  How do our smartphone sales compare with current market trends?
   ```
 
-Flujo esperado:
+Expected flow:
 
-✅ Router Agent → emite `[CROSS]`  
-⏭️ Ninguna condición individual es verdadera → cae al `elseActions`  
-✅ Sales Agent se ejecuta (datos internos de smartphones)  
-✅ Market Research se ejecuta (tendencias externas de mercado)  
-✅ Credit Risk se ejecuta  
-✅ Strategy Advisor sintetiza y responde al usuario  
+✅ Router Agent → emits `[CROSS]`
+⏭️ No individual condition evaluates to true → execution proceeds to `elseActions`
+✅ Sales Agent runs (retrieves internal smartphone data)
+✅ Market Research runs (retrieves external market trends)
+✅ Credit Risk runs
+✅ Strategy Advisor synthesizes the results and responds to the user
 
 ![New Foundry](/img/workflow12.png)
 
 ---
 
-Escenario 3:
+Scenario 3:
 
-**Query de perfil de clientes — solo Credit**
-- Click en **Preview**
-- Agregamos una pregunta de prueba y ejecutamos
+**Customer-profile query — Credit only**
+- Click **Preview**
+- Enter and submit the following test question
 
   ```
-  ¿Cuántos clientes tenemos con perfil crediticio alto?
+  How many customers have a high credit profile?
   ```
 
-Flujo esperado:
+Expected flow:
 
-✅ Router Agent → emite `[CREDIT]`  
-✅ Condition `[CREDIT]` es verdadera → Credit Risk Agent se ejecuta  
-⏭️ Sales, Market y Strategy Advisor se SALTAN  
-✅ Respuesta directa del Credit Risk Agent al usuario  
+✅ Router Agent → emits `[CREDIT]`  
+✅ Condition `[CREDIT]` is true → Credit Risk Agent runs
+⏭️ Sales, Market Research, and Strategy Advisor are skipped
+✅ Credit Risk Agent responds to the user
 
 ![New Foundry](/img/workflow13.png)
 
-En el menú **traces** también se puede analizar el flujo de cada nodo para efectos de resolución de problemas. Verás claramente cuáles nodos se ejecutaron y cuáles se saltaron en cada escenario.
+The **Traces** menu can also be used to inspect the execution of each node for troubleshooting. It clearly shows which nodes ran and which were skipped in each scenario.
 
-### Recomendaciones
+### Recommendations
 
-- El Router Agent puede refinarse continuamente ajustando su system prompt con más ejemplos de clasificación (few-shot examples). Cuantos más ejemplos específicos del dominio de Contoso incluyas, más preciso será el ruteo.
-- Una recomendación adicional es extender las capacidades de este flujo con ramificaciones que consideren reintentos cuando el Router no emita tags reconocidos, y otros flujos secundarios para casos "edge".
-- Como vimos, este flujo es determinístico pero inteligente en el ruteo inicial. Se invita opcionalmente a construir un flujo de tipo **Group Chat** que permita un manejo aún más autónomo de la colaboración entre agentes.
-
-### 🎓 Bonus: Explorando Group Chat Workflow (Opcional)
-
-**¿Por qué Group Chat es diferente?**
-
-En Sequential, fuiste el director de orquesta - definiste cada paso del flujo. En **Group Chat**, los agentes forman una mesa redonda donde un Manager Agent (IA) decide dinámicamente quién debe hablar y cuándo.
-
-Analogía:
-
-**Sequential** = Director de orquesta (tú) que indica a cada músico cuándo tocar
-**Group Chat** = Mesa redonda de expertos que deciden entre sí quién contribuye
+- Continuously refine the Router Agent’s system prompt by adding classification examples (few-shot examples). Adding more examples specific to Contoso’s domain will improve routing accuracy.
+- Consider extending the workflow with branches that retry routing when the Router Agent emits an unrecognized tag, as well as secondary workflows for edge cases.
+- This workflow is deterministic but uses intelligent initial routing. As an optional extension, create a **Group Chat** workflow to support more autonomous collaboration among agents.
 
 
-**Cuándo considerar Group Chat**
+### 🎓 Bonus: Exploring the Group Chat Workflow (Optional)
 
-Group Chat es útil cuando:
+#### How is Group Chat different?
 
-✅ Los agentes deben negociar o debatir  
-✅ El orden de participación depende del contexto  
-✅ Necesitas escalamiento dinámico (Tier 1 → Tier 2 → Specialist)  
-✅ Quieres que la IA decida la colaboración  
+In a Sequential workflow, you act as the conductor and define each step. In a **Group Chat** workflow, agents form a roundtable in which an AI Manager Agent dynamically decides who should speak and when.
 
-**Ejemplos de casos de uso ideales:**
+#### Analogy:
 
-- Customer Support Escalation: Agente básico → Especialista → Manager (según complejidad)  
-- Medical Diagnosis: Múltiples especialistas discuten síntomas y llegan a consenso  
-- Legal Case Analysis: Abogados debaten estrategia colaborativamente  
-- Product Design: Designer, Engineer, PM iteran dinámicamente  
+- **Sequential** = A conductor instructing each musician when to play.
+- **Group Chat** = A roundtable of experts deciding among themselves who should contribute.
 
-### 📚 Recursos Adicionales
+#### When to consider Group Chat
+
+Group Chat is useful when:
+
+- ✅ Agents must negotiate or debate
+- ✅ The participation order depends on context
+- ✅ Dynamic escalation is required (Tier 1 → Tier 2 → Specialist)
+- ✅ The AI should determine how agents collaborate
+
+**Examples of suitable use cases:**
+
+- **Customer-support escalation:** General agent → Specialist → Manager, depending on complexity
+- **Medical diagnosis:** Multiple specialists discuss symptoms and reach consensus
+- **Legal-case analysis:** Lawyers collaboratively evaluate strategy
+- **Product design:** Designers, engineers, and product managers iterate dynamically
+
+### 📚 Additional Resources
 
 [Orchestrating Multi-Agent Conversations with Microsoft Foundry Workflows](https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/orchestrating-multi-agent-conversations-with-microsoft-foundry-workflows/4472329)   
 [Multi-Agent Orchestration Patterns](https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/building-a-digital-workforce-with-multi-agents-in-azure-ai-foundry-agent-service/4414671)  

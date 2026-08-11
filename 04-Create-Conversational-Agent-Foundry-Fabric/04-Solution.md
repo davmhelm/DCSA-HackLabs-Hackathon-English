@@ -34,34 +34,34 @@ Step-by-step guide to enable a conversational agent from AI Foundry integrated w
 ![Foundry-Agent](/img/foundry-agent.png)
 
 
-### 2 - Conectar el Agente al Data Agent de Fabric
+### 2 - Connect the Agent to the Fabric Data Agent
 
-1️. En la sección **Tools** (pueder ser desde Knowledge también) → **+ Add a new tool** → **Fabric Data Agent** → **Add tool**  , configura el **Data Agent** creado en el reto anterior de Fabric.
+1️. In the **Tools** section (you can also access it from Knowledge) → **+ Add a new tool** → **Fabric Data Agent** → **Add tool**, and then configure the **Data Agent** created in the previous Fabric challenge.
 
 
 ![Foundry-Agent](/img/fabric-tool.png)
 
 
-2. En la ventana emergente debemos configurar una nueva conexión de tipo Fabric Data Agent, para esto necesitamos completar la siguiente información:
+2. In the dialog box, configure a new Fabric Data Agent connection by providing the following information:
 
-   - **Name**: Un nombre descriptivo para la conexión
-   - **Workspace ID**: Aca va el ID del Workspace donde esta alojado el Data Agent. Teniendo abierto el Data Agent corresponde al serial alfa-numérico que esta al inicio del web URL (1)
-   - **Artifact ID**:  Aca va el ID del artefacto (Data Agent). Teniendo abierto el Data Agent corresponde al segundo serial alfa-numérico que esta en el web URL(2)
+   - **Name**: A descriptive name for the connection
+   - **Workspace ID**: The ID of the workspace hosting the Data Agent. With the Data Agent open, this is the first alphanumeric identifier in the URL (1)
+   - **Artifact ID**:  The ID of the Data Agent artifact. With the Data Agent open, this is the second alphanumeric identifier in the URL (2)
   
-Imagen de referencia para validar `Workspace ID` y `Artifact ID` del Data Agent
+Reference image for locating and verifying the Data Agent's `Workspace ID` and `Artifact ID`
 
 
 ![Foundry-Agent](/img/workspace-artifact.png)
      
 
-3. Verifica nuevamente desde Fabric que el Data Agent esté vinculado al **modelo semántico Gold** o las tablas que necesitamos para que realice su trabajo, que incluye tablas como:  
+3. In Fabric, verify again that the Data Agent is connected to the **Gold semantic model** or the tables it needs to perform its tasks, including:  
    - `gold.business_operations`  
    - `gold.credit_score`
-   - `modelo semantico`
+   - `semantic model`
 
-4. Guarda la configuración de conexión.  
+4. Save the connection configuration.  
 
-✅ **Resultado esperado:** El agente de Foundry esta vinculado con el Data Agent.
+✅ **Expected result:** The Foundry agent is connected to the Fabric Data Agent.
 
 
 ![Foundry-Agent](/img/fabric-tools.png)

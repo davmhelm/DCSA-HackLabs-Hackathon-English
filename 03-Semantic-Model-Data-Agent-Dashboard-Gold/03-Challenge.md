@@ -94,10 +94,10 @@ Optionally use *Power BI Copilot* to help generate report content.
 
 ## 📝 Documentation
 
-- [Gold Semantic Model (Power BI)](https://learn.microsoft.com/es-es/fabric/data-warehouse/semantic-models)  
-- [Update Semantic Model](https://learn.microsoft.com/es-es/power-bi/connect-data/data-pipeline-templates)
-- [Create Data Agent](https://learn.microsoft.com/es-es/fabric/data-science/how-to-create-data-agent)
-- [How to join tables in Fabric](https://learn.microsoft.com/en-us/fabric/data-engineering/tutorial-build-lakehouse)
+- [Gold Semantic Model (Power BI)](https://learn.microsoft.com/fabric/data-warehouse/semantic-models)  
+- [Update Semantic Model](https://learn.microsoft.com/power-bi/connect-data/data-pipeline-templates)
+- [Create Data Agent](https://learn.microsoft.com/fabric/data-science/how-to-create-data-agent)
+- [How to join tables in Fabric](https://learn.microsoft.com/fabric/data-engineering/tutorial-build-lakehouse)
 
 💡 *Tip:* Document relationships, measures and data sources used. This model will serve as a foundation for building enterprise copilots and advanced predictive analytics. 🚀  
 

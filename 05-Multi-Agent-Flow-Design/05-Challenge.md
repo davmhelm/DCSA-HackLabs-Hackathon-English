@@ -345,9 +345,9 @@ Documentation items
 
 ## 📝 Documentation
 
--  [Build a Workflow in Microsoft AI Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/overview)
--  [Tools in Foundry Agent Service](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/concepts/workflow)
--  [Grounding with Bing Search](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/how-to/tools-classic/bing-grounding?view=foundry-classic)
+-  [Build a Workflow in Microsoft AI Foundry](https://learn.microsoft.com/azure/ai-foundry/agents/overview)
+-  [Tools in Foundry Agent Service](https://learn.microsoft.com/azure/ai-foundry/agents/concepts/workflow)
+-  [Grounding with Bing Search](https://learn.microsoft.com/azure/ai-foundry/agents/how-to/tools-classic/bing-grounding?view=foundry-classic)
 -  [Orchestrating Multi-Agent Conversations with Microsoft Foundry Workflows](https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/orchestrating-multi-agent-conversations-with-microsoft-foundry-workflows/4472329)
 -  [Multi-Agent Orchestration Patterns](https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/building-a-digital-workforce-with-multi-agents-in-azure-ai-foundry-agent-service/4414671)
 -  [Agent Framework Examples](https://github.com/microsoft/agent-framework)

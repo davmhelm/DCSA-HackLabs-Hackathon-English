@@ -18,7 +18,7 @@ Step-by-step guide to ingest data from Azure Cosmos DB into the Bronze layer of 
 ## Steps
 
 ### 1 - Design semantic model in Microsoft Fabric
-From our `Lakehouse`, with all layers and fresh data ready, create a new semantic model in [Direct Lake](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview) mode:
+From our `Lakehouse`, with all layers and fresh data ready, create a new semantic model in [Direct Lake](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview) mode:
 
 1. In the Lakehouse main panel select `New semantic model`
 2. In the new model panel, add a name for the model, e.g.: `Contoso-semantic-model` (note that Direct Lake is enabled by default).

@@ -7,12 +7,12 @@
                 "recurrence": {
                     "interval": 1,
                     "frequency": "Minute",
-                    "timeZone": "Central America Standard Time"
+                    "timeZone": "Central Standard Time"
                 },
                 "evaluatedRecurrence": {
                     "interval": 1,
                     "frequency": "Minute",
-                    "timeZone": "Central America Standard Time"
+                    "timeZone": "Central Standard Time"
                 },
                 "splitOn": "@triggerBody()",
                 "type": "ApiConnection",
@@ -25,7 +25,7 @@
                     "method": "get",
                     "path": "/v2/datasets/@{encodeURIComponent(encodeURIComponent('<<Your Storage Account Name>>'))}/triggers/batch/onupdatedfile",
                     "queries": {
-                        "folderId": "<<Your  Incoming COntainer FolderID>>",
+                        "folderId": "<<Your  Incoming Container FolderID>>",
                         "maxFileCount": 10,
                         "checkBothCreatedAndModifiedDateTime": false
                     }

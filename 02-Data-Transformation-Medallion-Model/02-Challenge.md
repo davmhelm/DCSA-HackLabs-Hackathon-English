@@ -81,7 +81,7 @@ Apply the same preparations for `products` and `transactions` tables so they are
 
 ## 📝 Documentation
 
-- [Notebook Transformations and ML](https://learn.microsoft.com/es-es/fabric/data-engineering/how-to-use-notebook)
+- [Notebook Transformations and ML](https://learn.microsoft.com/fabric/data-engineering/how-to-use-notebook)
 
 
 💡 *Tip:* Keep a record of model parameters and results, as they will be important for the next challenge: **semantic modeling**. 🚀

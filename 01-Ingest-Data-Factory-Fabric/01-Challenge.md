@@ -69,7 +69,7 @@ After completing this challenge you will be able to:
 ## 📝 Documentation
 
 
-- [Create Dataflow Gen2](https://learn.microsoft.com/es-mx/fabric/data-factory/create-first-dataflow-gen2)
+- [Create Dataflow Gen2](https://learn.microsoft.com/fabric/data-factory/create-first-dataflow-gen2)
 
 
 

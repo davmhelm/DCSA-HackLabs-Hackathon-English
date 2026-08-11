@@ -13,7 +13,7 @@ The image below shows the workflow for this scenario.
 
 ---
 
-Make sure you have completed the Semantic Model, Data Agent and Value Dashboard (Gold) challenge (see `03-Solution.md`). Also verify the following [prerequisites](https://learn.microsoft.com/en-us/fabric/data-science/data-agent-foundry#prerequisites).
+Make sure you have completed the Semantic Model, Data Agent and Value Dashboard (Gold) challenge (see `03-Solution.md`). Also verify the following [prerequisites](https://learn.microsoft.com/fabric/data-science/data-agent-foundry#prerequisites).
 
 ### 🎯 Mission
 After completing this challenge you will be able to:
@@ -130,8 +130,8 @@ After completing this challenge you will be able to:
 
 ## 📝 Documentation
 
-- [AI Foundry Agent Setup](https://learn.microsoft.com/es-es/azure/ai-foundry/agents/environment-setup)
-- [Connect to Fabric Data Agent](https://learn.microsoft.com/es-es/azure/ai-foundry/agents/how-to/tools/fabric?pivots=portal)
-- [Official Reference - Create Fabric Data Agents](https://learn.microsoft.com/en-us/fabric/data-science/how-to-create-data-agent)
+- [AI Foundry Agent Setup](https://learn.microsoft.com/azure/ai-foundry/agents/environment-setup)
+- [Connect to Fabric Data Agent](https://learn.microsoft.com/azure/ai-foundry/agents/how-to/tools/fabric?pivots=portal)
+- [Official Reference - Create Fabric Data Agents](https://learn.microsoft.com/fabric/data-science/how-to-create-data-agent)
   
 

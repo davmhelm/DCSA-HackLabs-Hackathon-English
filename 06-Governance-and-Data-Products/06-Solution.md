@@ -398,14 +398,14 @@ Owner: [your user]
 Next:
 
 Use cases:
-- Dashboard ejecutivo de ventas mensuales
-- Análisis de segmentación de clientes (RFM)
-- Modelos predictivos de churn de clientes
-- Reportes de cumplimiento de metas comerciales
+- Executive monthly sales dashboard
+- Customer segmentation analysis (RFM)
+- Predictive customer churn models
+- Sales-target attainment reports
 
 Next:
 
-Custom attributes: Vacio
+Custom attributes: None
 
 ```
 
@@ -415,188 +415,184 @@ Custom attributes: Vacio
 
 ---
 
-### **5.3 Agregar data assets al producto**
+### **5.3 Add Data Assets to the Product**
 
-1. En tu data product `Sales Insights Product` → Click **Add data assets** (en la sección Assets)
-2. En el buscador:
-   - **Search**: `credit_score`
-   - Selecciona la tabla `gold.credit_score` de tu Lakehouse
-   - Click **Add**
-3. Repite para agregar:
-   - Tabla `business_operations`
-   - Tabla `gold.business_operations` (si existe)
-   - Opcionalmente: Semantic Model de Power BI (si tienes uno publicado)
+1. In the `Sales Insights Product` data product, select **Add data assets** in the **Assets** section.
+2. In the search interface:
+   - **Search:** `credit_score`
+   - Select the `gold.credit_score` table from your Lakehouse.
+   - Select **Add**.
+3. Repeat these steps to add:
+   - The `business_operations` table
+   - The `gold.business_operations` table, if it exists
+   - Optionally, a Power BI semantic model, if one has been published
 
-**Nota**: Solo puedes agregar assets que:
-- Estén en el Data Map (ya escaneados)
-- Pertenezcan al scope de tu Governance Domain
-- Tengas permisos para ver
+**Note:** You can add only assets that:
 
+- Are registered in the Data Map through a completed scan
+- Belong to the scope of your Governance Domain
+- You have permission to view
 
 ![Purview](/img/purview-account16.png)
 
 
 ---
 
-### **5.4 Documentar el Data Product**
+### **5.4 Document the Data Product**
 
-#### **A. Agregar enlaces externos**
+#### **A. Add External Links**
 
-1. En el data product → Pestaña **Details**
-2. Sección **Documentation** → Click **+ Add link**
-3. **Add documentation link**:
-```
-   Display name: Especificación de Métricas de Ventas
-   Link: https://contoso.sharepoint.com/sites/data/sales-metrics-spec
-   Description: Documento con definiciones de KPIs y reglas de negocio
-```
+1. In the data product, open the **Details** tab.
+2. In **Documentation**, select **+ Add link**.
+3. Under **Add documentation link**, enter:
+
+````text
+Display name: Sales Metrics Specification
+Link: https://contoso.sharepoint.com/sites/data/sales-metrics-spec
+Description: Document containing KPI definitions and business rules
+````
 4. Click **Create**
 
 ![Purview](/img/purview-account17.png)
 
 
 
-#### **B. Agregar descripciones a los assets**
+#### **B. Add Descriptions to the Assets**
 
-1. En la sección **Data assets**, para cada asset agregado:
+In **Data assets**, add the following information to each asset.
 
-   **Para `credit_score` table:**
-```
-   Descripción: Tabla con información de clientes activos y sus atributos crediticios. 
-   Incluye datos financieros, segmentación.
-   Grain: Un registro por cliente único (customer_id)
-   Actualización: Diaria a las 2:00 AM
-```
+   **For `credit_score` table:**
+````text
+Description: Table containing active-customer information and credit attributes.
+Includes financial and segmentation data.
+Grain: One record per unique customer (customer_id)
+Refresh schedule: Daily at 2:00 AM
+````
 
-   **Para `business_operations` table:**
-```
-   Descripción: Tabla con transacciones históricas desde 2024.
-   Contiene detalles de cada venta incluyendo productos, montos, descuentos y métodos de pago.
-   Grain: Un registro por línea de venta (product__id)
-   Actualización: Diaria a las 3:00 AM
-```
+   **For `business_operations` table:**
+````text
+Description: Table containing historical transactions since 2024.
+Includes details for each sale, including products, amounts, discounts, and payment methods.
+Grain: One record per sales line item (product__id)
+Refresh schedule: Daily at 3:00 AM
+````
 
 ---
 
-### **5.5 Configurar políticas de acceso**
+### **5.5 Configure access policies**
 
-1. En el data product → Click **Manage policies** (botón superior)
-2. Pestaña **Access policies**:
+1. In the data product, select **Manage policies**.
+2. Open the **Access policies** tab.
 
-**Configuración de tiempo:**
-```
+**Access duration:**
+````text
 Access time limit: 365 days (1 year)
-Reason: Los usuarios necesitan acceso continuo para reportes recurrentes
-```
+Reason: Users require continuous access for recurring reports
+````
 
-**Workflow de aprobación:**
-```
+**Approval workflow:**
+````text
 ☑️ Approval required
-Approvers: [Agrega tu usuario o un grupo de data stewards]
-
-```
+Approvers: [Add your user account or a data stewards group]
+````
 
 3. Click **Save**
-   
 
-5. (Opcional) Pestaña **Inherited policies**:
-   - Aquí verás políticas heredadas del Governance Domain
-   - Por ejemplo: políticas de data quality o compliance
-
----
-
-### **5.6 Publicar el Governance Domain**
-
-⚠️ **IMPORTANTE**: Un Data Product solo puede publicarse si su Governance Domain está publicado primero.
-
-1. Regresa a **Catalog management** → **Governance domains**
-2. Click en `ContosoRetailDomain`
-3. Revisa que tenga:
-   - ✅ Al menos un Data Product creado
-   - ✅ Owner asignado
-   - ✅ Descripción completa
-4. Click **Publish** (botón superior derecho)
-
-El status del domain cambiará de **Draft** → **Published** ✅
+4. Optionally, open the **Inherited policies** tab:
+   - This tab displays policies inherited from the Governance Domain.
+   - Examples include data-quality or compliance policies.
 
 ---
 
-### **5.7 Publicar el Data Product**
+### **5.6 Publish the Governance Domain**
 
-1. Ve a **Data products** → `Sales Insights Product`
-2. Verifica que tenga:
-   - ✅ Al menos 1 data asset agregado
-   - ✅ Descripción y use cases completos
-   - ✅ Owner asignado
-   - ✅ Políticas de acceso configuradas
-3. Click **Publish** (botón superior)
+⚠️ **IMPORTANT:** A Data Product can be published only after its Governance Domain has been published.
 
-El status del producto cambiará a **Published** ✅
+1. Return to **Catalog management** → **Governance domains**.
+2. Select `ContosoRetailDomain`.
+3. Verify that it has:
+   - ✅ At least one Data Product
+   - ✅ An assigned owner
+   - ✅ A complete description
+4. Select **Publish** in the upper-right corner.
+
+The domain status changes from **Draft** to **Published** ✅.
+
+---
+
+1. Go to **Data products** → `Sales Insights Product`.
+2. Verify that it has:
+   - ✅ At least one associated data asset
+   - ✅ A complete description and complete use cases
+   - ✅ An assigned owner
+   - ✅ Configured access policies
+3. Select **Publish**.
+
+The product status changes to **Published** ✅.
 
 ---
 
 
+## 🎯 Final Result
 
+After completing this exercise, you have implemented:
 
-
-## 🎯 Resultado Final Alcanzado
-
-Al completar este ejercicio, has logrado:
-
-✅ **Catalogación automatizada**: assets de Fabric visibles en Purview Data Map  
-✅ **Data Product gobernado**: `Sales Insights Product` publicado con documentación completa  
-✅ **Glosario de negocio**: términos de negocio vinculados a 12 assets  
-✅ **Clasificación de datos sensibles**: columnas con etiquetas de privacidad aplicadas  
-✅ **Linaje de datos**: Trazabilidad desde Lakehouse hasta productos de consumo  
-✅ **Gobierno federado**: Workflow de solicitud y aprobación de acceso funcional  
-✅ **Discoverability**: Data products buscables y consumibles por toda la organización  
+- ✅ **Automated cataloging:** Fabric assets are visible in the Purview Data Map
+- ✅ **Governed Data Product:** `Sales Insights Product` is published with complete documentation
+- ✅ **Business glossary:** Business terms are linked to the relevant Data Products
+- ✅ **Sensitive-data classification:** Privacy classifications are applied to sensitive columns
+- ✅ **Data lineage:** Traceability from the Lakehouse to downstream data products
+- ✅ **Federated governance:** A functional access-request and approval workflow
+- ✅ **Discoverability:** Data Products can be found and consumed across the organization
 
 ---
 
-## 📚 Referencias Oficiales
+## 📚 Official References
 
-### **Documentación Core**
-- [Purview + Fabric Integration Overview](https://learn.microsoft.com/en-us/fabric/governance/microsoft-purview-fabric)
-- [Register and Scan Fabric Tenant (Same Tenant)](https://learn.microsoft.com/en-us/purview/register-scan-fabric-tenant)
-- [Data Products in Unified Catalog](https://learn.microsoft.com/en-us/purview/unified-catalog-data-products)
-- [Create and Manage Data Products](https://learn.microsoft.com/en-us/purview/unified-catalog-data-products-create-manage)
+### **Core Documentation**
+- [Purview + Fabric Integration Overview](https://learn.microsoft.com/fabric/governance/microsoft-purview-fabric)
+- [Register and Scan Fabric Tenant (Same Tenant)](https://learn.microsoft.com/purview/register-scan-fabric-tenant)
+- [Data Products in Unified Catalog](https://learn.microsoft.com/purview/unified-catalog-data-products)
+- [Create and Manage Data Products](https://learn.microsoft.com/purview/unified-catalog-data-products-create-manage)
 
-### **Tutoriales Paso a Paso**
-- [Governance Tutorial - Publish Data Products](https://learn.microsoft.com/en-us/purview/section3-publish-data-products)
-- [Sample Setup Walkthrough](https://learn.microsoft.com/en-us/purview/data-governance-setup-sample)
-- [Get Started with Data Governance](https://learn.microsoft.com/en-us/purview/data-governance-get-started)
+### **Step-by-Step Tutorials**
+- [Governance Tutorial - Publish Data Products](https://learn.microsoft.com/purview/section3-publish-data-products)
+- [Sample Setup Walkthrough](https://learn.microsoft.com/purview/data-governance-setup-sample)
+- [Get Started with Data Governance](https://learn.microsoft.com/purview/data-governance-get-started)
 
-### **Configuración Avanzada**
-- [Data Quality for Fabric Lakehouse](https://learn.microsoft.com/en-us/purview/data-quality-for-fabric-data-estate)
-- [Metadata and Lineage from Fabric](https://learn.microsoft.com/en-us/purview/data-map-lineage-fabric)
-- [Microsoft Purview Hub in Fabric](https://learn.microsoft.com/en-us/fabric/governance/use-microsoft-purview-hub)
+### **Advanced Configuration**
+- [Data Quality for Fabric Lakehouse](https://learn.microsoft.com/purview/data-quality-for-fabric-data-estate)
+- [Metadata and Lineage from Fabric](https://learn.microsoft.com/purview/data-map-lineage-fabric)
+- [Microsoft Purview Hub in Fabric](https://learn.microsoft.com/fabric/governance/use-microsoft-purview-hub)
 
-### **Permisos y Seguridad**
-- [Purview Permissions Overview](https://learn.microsoft.com/en-us/purview/catalog-permissions)
-- [Access Policies for Data Products](https://learn.microsoft.com/en-us/purview/how-to-policies-data-owner-data-product)
+### **Permissions and Security**
+- [Purview Permissions Overview](https://learn.microsoft.com/purview/catalog-permissions)
+- [Access Policies for Data Products](https://learn.microsoft.com/purview/how-to-policies-data-owner-data-product)
 
 ---
 
-## 🎓 Conceptos Clave Aprendidos
+## 🎓 Key Concepts
 
-### **¿Qué es un Data Product en Purview?**
-Un **Data Product** NO es solo un dataset individual. Es un **concepto de negocio** que:
-- **Agrupa múltiples assets relacionados** (tablas, archivos, reports) bajo un caso de uso específico
-- **Proporciona contexto de negocio** (descripción, use cases, calidad esperada)
-- **Facilita el descubrimiento** usando lenguaje de negocio, no técnico
-- **Centraliza la gobernanza** (una política para todos los assets del producto)
-- **Simplifica el acceso** (una solicitud da acceso a todos los assets)
+### **What Is a Data Product in Purview?**
 
-### **Diferencia: Data Map vs Unified Catalog**
+A **Data Product** is not simply an individual dataset. It is a **business concept** that:
+
+- **Groups multiple related assets**, such as tables, files, and reports, under a specific use case
+- **Provides business context**, including descriptions, use cases, and data-quality expectations
+- **Improves discoverability** by using business terminology rather than technical terminology
+- **Centralizes governance** by applying policies across the product’s assets
+- **Simplifies access**, allowing one request to cover all assets in the product
+
+### **Data Map vs. Unified Catalog**
 
 | **Data Map** | **Unified Catalog** |
 |---|---|
-| Vista técnica de assets | Vista de negocio de products |
-| Escaneo automático de metadata | Curación manual de productos |
-| Orientado a data engineers | Orientado a data consumers |
-| Catálogo de "lo que existe" | Catálogo de "lo que es útil" |
+| Technical view of assets | Business view of Data Products |
+| Automated metadata scanning | Manual product curation |
+| Intended primarily for data engineers | Intended primarily for data consumers |
+| Catalog of what exists | Catalog of what is useful |
 
-### **Flujo de Gobierno en Purview + Fabric**
+### **Governance Flow in Purview and Fabric**
 ```
 1. DISCOVERY (Data Map)
    ↓ Fabric assets → Purview scan → Data Map
