@@ -30,195 +30,207 @@ By the end of this hackathon, participants will be able to:
 # Agenda
 
 
-| Día  | Actividad                                                                 | Tipo   |
+| Day  | Activity                                                                  | Type   |
 |------|---------------------------------------------------------------------------|--------|
-| Día 1 | Preparación de datos (estructuración, limpieza, perfilado)               | Reto   |
-| Día 1 | Ingesta de datos desde fuentes internas y externas                      | Reto   |
-| Día 1 | Transformación de datos con notebooks y pipelines                        | Reto   |
-| Día 1 | Enriquecimiento de datos y creación de modelo semántico                  | Reto   |
-| Día 1 | Round Table: Q&A con expertos y participantes                            | Reto   |
-| Día 1 | Cierre y resumen del día                                                 | Cierre |
-| Día 2 | Construcción de agente AI Foundry para análisis predictivo               | Reto   |
-| Día 2 | Orquestación multi-agente con pipelines y triggers                       | Reto   |
-| Día 2 | Seguridad en Fabric: roles, objetos, workspaces (opcional)               | Reto   |
-| Día 2 | Sesión de valor: Q&A sobre adopción, impacto y próximos pasos            | Cierre |
-| Día 2 | Cierre y entrega de reconocimientos                                      | Cierre |
+| Day 1 | Data preparation (structuring, cleansing, and profiling)                 | Challenge   |
+| Day 1 | Data ingestion from internal and external sources                        | Challenge   |
+| Day 1 | Data transformation using notebooks and pipelines                        | Challenge   |
+| Day 1 | Data enrichment and semantic model creation                              | Challenge   |
+| Day 1 | Round Table: Q&A with experts and participants                           | Challenge   |
+| Day 1 | Day wrap-up and summary                                                  | Wrap-up |
+| Day 2 | Building an AI Foundry agent for predictive analytics                    | Challenge   |
+| Day 2 | Multi-agent orchestration using pipelines and triggers                   | Challenge   |
+| Day 2 | Fabric security: roles, objects, and workspaces (optional)               | Challenge   |
+| Day 2 | Value session: Q&A on adoption, impact, and next steps                   | Wrap-up |
+| Day 2 | Closing session and awards presentation                                  | Wrap-up |
 
 
-# Arquitectura
-![Arquitectura](img/architecture.png)
+# Architecture
+![Architecture](img/architecture.png)
 
 
-# 📖 Historia de Caso de Uso
+# 📖 Use Case Story
  
-## "Contoso y la Inteligencia de Datos Multisectorial en Acción"
+## "Contoso and Cross-Industry Data Intelligence in Action"
  
-**Contoso**, una organización con presencia en los sectores **financiero y comercial**, enfrenta el reto de consolidar información proveniente de múltiples fuentes para habilitar análisis confiables, automatización inteligente y experiencias conversacionales basadas en datos. En el marco de este hackathon, los participantes asumen el rol de **equipo técnico** encargado de construir una solución moderna sobre **Microsoft Fabric**, poniendo a prueba sus habilidades en un entorno realista y multisectorial.
+**Contoso**, an organization operating in the **financial and retail sectors**, faces the challenge of consolidating information from multiple sources to enable reliable analytics, intelligent automation, and data-driven conversational experiences. During this hackathon, participants assume the role of a **technical team** responsible for building a modern solution on **Microsoft Fabric**, testing their skills in a realistic, cross-industry environment.
  
-### 🗃️ Fuentes de Datos
-El escenario comienza con tres conjuntos de datos en formato **JSON**, ingestados desde una base de datos NoSQL **Cosmos DB**:
+### 🗃️ Data Sources
+The scenario begins with three **JSON** datasets ingested from an **Azure Cosmos DB for NoSQL** database:
  
-• **Set de score crediticio:** información de clientes, comportamiento de pago y perfil financiero
-
-• **Set de productos retail:** datos sobre disponibilidad, valor comercial, categoría y marca de productos retail
-
-• **Set de transacciones:** compras de clientes, canales de compra, tasas de interes, locacion 
+- **Credit score dataset:** Customer information, payment behavior, and financial profiles
+- **Retail product dataset:** Product availability, retail value, category, and brand information
+- **Transaction dataset:** Customer purchases, purchase channels, interest rates, and locations
 
 
-
-![Modelo de Datos](img/container_schemas.png)
-
+![Data Model](img/container_schemas.png)
 
  
-### 🎯 Objetivo Principal
-Transformar, limpiar y estructurar los datasets en un **modelo enriquecido** que sirva como base para la creación de **agentes de inteligencia artificial**. Para ello, los participantes aplicarán el **modelo medallion** (Bronze → Silver → Gold), asegurando la calidad, trazabilidad y valor analítico de la información. El enfoque del ejercicio es por objetivos, por lo cual no hay una unica solucion y se motiva a que utilizen diferentes enfoques para completarlo.
+### 🎯 Primary Objective
+Transform, cleanse, and structure the datasets into an **enriched data model** that provides the foundation for creating **AI agents**. Participants will apply the **medallion architecture** (Bronze → Silver → Gold), ensuring data quality, traceability, and analytical value. The exercise is objective-driven: there is no single correct solution, and participants are encouraged to use different approaches.
+
+
+### 📊 Semantic Model and Key Metrics
+After the data has been structured in the **Gold layer**, participants will design a **Power BI semantic model** that supports analysis across key metrics such as:
  
-### 📊 Modelo Semántico y Métricas Clave
-Una vez estructurados los datos en la **capa Gold**, se diseñará un **modelo semántico en Power BI**, que permitirá correlacionar métricas clave como por ejemplo:
+- Average credit score by segment
+- Retail value by category
+- Product return rate by brand
+- Monthly risk or sales trends
+- Performance by channel
+- Interest-free installment plan analysis
+- Payment methods
+
+
+### 🤖 Conversational Agents
+Using **AI Foundry**, participants will create **agents** capable of interacting with data through **natural language** without exposing technical code. These agents will address automation challenges and orchestrate multi-agent workflows using **large language models (LLMs)**. They will connect to semantic models through **Fabric Data Agents**, supporting conversational queries such as:
  
-• Score promedio por segmento  
-• Valor comercial por categoría  
-• Tasa de devolución por marca  
-• Tendencias mensuales de riesgo o ventas  
-• Performance por canal  
-• Analisis de MSI (Meses sin Intereses)  
-• Metodos de pago  
+- *"Which segment has the highest average credit score?"*
+- *"Which products have the highest return rate?"*
+- *"Is there a relationship between credit score and purchase amount?"*
+- *"How do customers purchase products based on their credit profiles?"*
+- *"Which product categories does each credit profile prefer?"*
+ 
+
+### 📈 Visualization and Insights
+Finally, the generated **insights** will be presented through **interactive Power BI dashboards**, enabling data-driven decision-making for both **financial and retail analysts**. This use case demonstrates a realistic and scalable adoption of **Microsoft Fabric** in hybrid environments, where **data intelligence** becomes a competitive advantage for Contoso by driving innovation, operational efficiency, and broader access to analytics (democratization of analytics).
+
+
+---
+ 
+# 🎯 Challenge Summary – From Insight to Decision
+ 
+## 🏆 Challenge 00: Landing Zone Configuration and Data Preparation
+ 
+**📖 Scenario:** Contoso must prepare its Microsoft Fabric environment, connect data stored in Azure Cosmos DB, and establish a landing zone organized into data layers.
 
  
-### 🤖 Agentes Conversacionales
-Utilizando **AI Foundry**, los participantes crearán **agentes** capaces de interactuar con los datos mediante **lenguaje natural**, sin mostrar código técnico, resolviendo desafíos de automatización y orquestando flujos multi-agente con **modelos de lenguaje de gran escala (LLMs)**. Estos agentes estarán conectados a los modelos semánticos mediante **Data Agents**, permitiendo consultas conversacionales como:
+### 🎯 Key Goals:
+- ✅ Create an Azure Cosmos DB for NoSQL account and load the JSON datasets (financial, retail, and transaction data)
+- ✅ Configure a Microsoft Fabric workspace with a layered structure
+- ✅ Establish a connection between Azure Cosmos DB and Fabric
+- ✅ Create a Lakehouse using the medallion architecture (Bronze, Silver, and Gold)
+- ✅ Explore and validate the JSON data structures
+
+
+### 🚀 Deliverables:
+- Azure Cosmos DB configured with data containers
+- Fabric workspace with a Lakehouse structured into layers
+- Documentation of the planned data flow
+
+---
  
-• *"¿Qué segmento tiene mayor score promedio?"*  
-• *"¿Qué productos tienen mayor tasa de devolución?"*  
-• *"¿Hay relación entre score y monto de compra?"*  
-• *¿Cómo compran los clientes según su perfil crediticio?"*  
-• *"¿Qué categorías de productos prefiere cada perfil crediticio?"*  
+## 🏆 Challenge 01: Data Ingestion from Cosmos DB into Microsoft Fabric (Bronze Layer)
  
-### 📈 Visualización e Insights
-Finalmente, los **insights generados** se visualizarán en **tableros interactivos en Power BI**, facilitando la toma de decisiones basada en datos tanto para **analistas financieros** como **comerciales**. Este caso ejemplifica una adopción realista y escalable de **Microsoft Fabric** en entornos híbridos, donde la **inteligencia de datos** se convierte en una ventaja competitiva para Contoso, impulsando la innovación, la eficiencia operativa y la democratización del análisis.
+**📖 Scenario:** Consolidate Contoso's operational data in Microsoft Fabric by ingesting it from Azure Cosmos DB into the Bronze layer and applying basic data cleansing.
+ 
+### 🎯 Key Goals:
+
+- ✅ Implement ingestion from Azure Cosmos DB using Dataflow Gen2
+- ✅ Apply basic data cleansing, including handling null values, removing unnecessary columns, and normalizing data
+- ✅ Validate the data load and schema in the Bronze layer
+- ✅ Prepare the data for advanced transformations
+ 
+### 🚀 Deliverables:
+
+- Functional Dataflow Gen2 with basic transformations
+- Bronze tables containing cleansed and structured data
+- Validation of ingested-data integrity
  
 ---
  
-# 🎯 Resumen de Retos - Del Insight a la Decisión
+## 🏆 Challenge 02: Intermediate Transformation and Exploratory Analysis (Silver Layer)
  
-## 🏆 Reto 00: Configuración de Zona de Aterrizaje y Preparación de Datos
+**📖 Scenario:** Assess data quality and create an optimized intermediate representation in the Silver layer by applying advanced transformations and exploratory analysis with machine learning.
  
-**📖 Escenario:** Contoso debe preparar el entorno de trabajo en Microsoft Fabric, conectando datos almacenados en Azure Cosmos DB y estableciendo una zona de aterrizaje estructurada en capas.
+### 🎯 Key Goals:
+
+- ✅ Create Silver tables with intermediate transformations
+- ✅ Apply aggregations and analytical metrics, such as customer credit scores, product profiles, and transactions by channel
+- ✅ Perform exploratory analysis using K-means clustering or another preference-modeling technique; non-predictive analysis may be used if machine-learning experience is limited
+- ✅ Prepare data for semantic modeling in the Gold layer
  
-### 🎯 Objetivos Clave:
-- ✅ Crear Azure Cosmos DB NoSQL y cargar datasets JSON (financiero, retail, transacciones)
-- ✅ Configurar workspace en Microsoft Fabric con estructura de capas
-- ✅ Establecer conexión entre Cosmos DB y Fabric
-- ✅ Crear Lakehouse con arquitectura medallion (Bronze, Silver, Gold)
-- ✅ Explorar y validar estructura de datos JSON
- 
-### 🚀 Entregables:
-- Cosmos DB configurado con contenedores de datos
-- Workspace de Fabric con Lakehouse estructurado por capas
-- Documentación del flujo de datos planificado
- 
----
- 
-## 🏆 Reto 01: Ingesta de Datos desde Cosmos DB a Microsoft Fabric (Capa Bronze)
- 
-**📖 Escenario:** Consolidar datos operativos de Contoso en Microsoft Fabric mediante ingesta desde Azure Cosmos DB hacia la capa Bronze, aplicando limpieza básica.
- 
-### 🎯 Objetivos Clave:
-- ✅ Implementar ingesta con Dataflows Gen2 desde Cosmos DB
-- ✅ Aplicar limpieza básica (valores nulos, columnas innecesarias, normalización)
-- ✅ Validar carga y estructura de datos en capa Bronze
-- ✅ Preparar datos para transformaciones avanzadas
- 
-### 🚀 Entregables:
-- Dataflow Gen2 funcional con transformaciones básicas
-- Tabla Bronze con datos limpios y estructurados
-- Validación de integridad de datos ingeridos
+### 🚀 Deliverables:
+
+- Silver tables containing transformations, predictions, and business metrics
+- Clustering analysis with segmentation insights, or an equivalent analysis
+- Optimized data ready for the Gold layer
  
 ---
  
-## 🏆 Reto 02: Transformación Intermedia y Análisis Exploratorio (Capa Silver)
+## 🏆 Challenge 03: Semantic Model, Data Agent, and Business-Value Dashboard (Gold Layer)
  
-**📖 Escenario:** Evaluar calidad de datos y crear versión intermedia optimizada en capa Silver, aplicando transformaciones avanzadas y análisis exploratorio con Machine Learning.
+**📖 Scenario:** Enable business analytics through a robust semantic model, a conversational Data Agent, and an interactive dashboard that answers key business questions.
  
-### 🎯 Objetivos Clave:
-- ✅ Crear tablas Silver con transformaciones intermedias
-- ✅ Aplicar agrupaciones y métricas analíticas (score crediticio por cliente, perfiles de producto, transacciones por canal)
-- ✅ Implementar análisis exploratorio con K-Means clustering u otro modelado de preferencia (puede ser analisis no predictivo si no se maneja ML)
-- ✅ Preparar datos para modelado semántico en Gold
+### 🎯 Key Goals:
+
+- ✅ Design a Gold semantic model with relevant measures and relationships; normalized or denormalized models may be used
+- ✅ Create a Data Agent connected to either the semantic model or the Lakehouse Gold tables
+- ✅ Develop a Power BI dashboard with business-value visualizations
+- ✅ Validate answers to business questions using Copilot
  
-### 🚀 Entregables:
-- Tablas Silver con transformaciones, predicciones y métricas de negocio
-- Análisis de clustering con insights de segmentación (o analisis equivalente)
-- Datos optimizados listos para capa Gold
- 
----
- 
-## 🏆 Reto 03: Modelo Semántico, Data Agent y Dashboard de Valor (Capa Gold)
- 
-**📖 Escenario:** Habilitar análisis de negocio mediante modelo semántico robusto, Data Agent conversacional y dashboard interactivo para responder preguntas clave del negocio.
- 
-### 🎯 Objetivos Clave:
-- ✅ Diseñar modelo semántico Gold con medidas y relaciones relevantes. Se pueden implementar modelos normalizados o denormalizados.
-- ✅ Crear Data Agent conectado al modelo semántico o a las tablas Gold del Lakehouse
-- ✅ Desarrollar dashboard Power BI con visualizaciones de valor
-- ✅ Validar respuestas a preguntas de negocio mediante Copilot
- 
-### 🚀 Entregables:
-- Modelo semántico con medidas clave (ejemplo: valor_comercial_total, productos_disponibles)
-- Data Agent funcional para consultas en lenguaje natural
-- Dashboard Power BI publicado con métricas estratégicas
+### 🚀 Deliverables:
+
+- Semantic model with key measures, such as `total_retail_value` and `available_products`
+- Functional Data Agent for natural-language queries
+- Published Power BI dashboard with strategic metrics
  
 ---
  
-## 🏆 Reto 04: Creación de Agente Conversacional en AI Foundry
+## 🏆 Challenge 04: Creating a Conversational Agent in AI Foundry
  
-**📖 Escenario:** Permitir que analistas interactúen con datos usando lenguaje natural, creando un agente en Azure AI Foundry integrado con el modelo semántico de Fabric.
+**📖 Scenario:** Enable analysts to interact with data through natural language by creating an Azure AI Foundry agent integrated with the Fabric semantic model.
  
-### 🎯 Objetivos Clave:
-- ✅ Diseñar agente conversacional en AI Foundry integrado con Fabric
-- ✅ Conectar agente al Data Agent asociado al modelo semántico Gold
-- ✅ Configurar intents y prompts orientados a preguntas reales de negocio
-- ✅ Validar respuestas en lenguaje natural sin código técnico
-- ✅ Publicar agente para uso de analistas
+### 🎯 Key Goals:
+
+- ✅ Design a conversational AI Foundry agent integrated with Fabric
+- ✅ Connect the agent to the Data Agent associated with the Gold semantic model
+- ✅ Configure intents and prompts for realistic business questions
+- ✅ Validate natural-language answers that do not expose technical code
+- ✅ Publish the agent for analyst use
  
-### 🚀 Entregables:
-- Agente conversacional funcional en AI Foundry conectado a Data Agent de Fabric
-- Configuración de intents para preguntas de negocio frecuentes
-- Integración completa con modelo semántico de Fabric
-- Validación de respuestas en lenguaje natural
- 
----
- 
-## 🏆 Reto 05: Orquestación Multi-agente y Flujos Colaborativos
- 
-**📖 Escenario:** Diseñar y documentar un flujo multi-agente que coordine ingesta, análisis y ejecución para automatizar tareas complejas y adaptarse dinámicamente a escenarios cambiantes.
- 
-### 🎯 Objetivos Clave:
-- ✅ Definir tres agentes especializados [Sales Analyst, Credit Analyst, Research Analyst] y uno sintetizador [Strategy Advisor]. Puedes definirlos segun el escenario que planteaste.
-- ✅ Diseñar flujo orquestado
-- ✅ Simular escenarios de negocio y validar el comportamiento de los agentes
-- ✅ Documentar diseño para replicabilidad y escalabilidad
- 
-### 🚀 Entregables:
-- Arquitectura de tres agentes con roles definidos y un agente sintetizador
-- Flujo orquestado
-- Simulación de escenarios de negocio
-- Documentación completa del diseño multi-agente
+### 🚀 Deliverables:
+
+- Functional AI Foundry conversational agent connected to the Fabric Data Agent
+- Intent configuration for frequently asked business questions
+- Complete integration with the Fabric semantic model
+- Validation of natural-language answers
  
 ---
  
-## 📚 Recursos y Documentación
+## 🏆 Challenge 05: Multi-Agent Orchestration and Collaborative Workflows
  
-### 🔗 Enlaces de Referencia:
-- [Documentación Microsoft Fabric](https://learn.microsoft.com/es-es/fabric/)
-- [Azure AI Foundry](https://learn.microsoft.com/es-es/azure/ai-foundry/)
-- [Power BI Embedded](https://learn.microsoft.com/es-es/power-bi/)
-- [Azure Cosmos DB](https://learn.microsoft.com/es-es/azure/cosmos-db/)
+**📖 Scenario:** Design and document a multi-agent workflow that coordinates ingestion, analysis, and execution to automate complex tasks and adapt dynamically to changing scenarios.
  
-### 🎯 Próximos Pasos:
-Con estos retos completados, habrás construido una solución completa que va **del insight a la decisión**, implementando:
-- ✅ Pipeline de datos completo con arquitectura medallion
-- ✅ Modelo semántico robusto para análisis de negocio
-- ✅ Agentes conversacionales para democratización de datos
-- ✅ Orquestación inteligente y dinámica para automatización de procesos
+### 🎯 Key Goals:
+
+- ✅ Define three specialized agents [Sales Analyst, Credit Analyst, and Research Analyst] and one synthesizer agent [Strategy Advisor]; these roles may be adapted to the selected scenario
+- ✅ Design an orchestrated workflow
+- ✅ Simulate business scenarios and validate agent behavior
+- ✅ Document the design to support reproducibility and scalability
+ 
+### 🚀 Deliverables:
+
+- Architecture containing three specialized agents with defined roles and one synthesizer agent
+- Orchestrated workflow
+- Business-scenario simulations
+- Complete documentation of the multi-agent design
+ 
+---
+ 
+## 📚 Resources and Documentation
+ 
+### 🔗 Reference Links:
+- [Microsoft Fabric](https://learn.microsoft.com/fabric/)
+- [Azure AI Foundry](https://learn.microsoft.com/azure/ai-foundry/)
+- [Power BI Embedded](https://learn.microsoft.com/power-bi/)
+- [Azure Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/)
+ 
+### 🎯 Next Steps:
+After completing these challenges, you will have built a complete solution that moves **from insight to decision** by implementing:
+
+- ✅ An end-to-end data pipeline using the medallion architecture
+- ✅ A robust semantic model for business analytics
+- ✅ Conversational agents that broaden access to data
+- ✅ Intelligent, dynamic orchestration for process automation
 
